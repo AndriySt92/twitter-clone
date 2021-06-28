@@ -10,6 +10,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import GroupIcon from '@material-ui/icons/Group';
 import MessageIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -130,13 +131,13 @@ export function SignIn() {
                         <TwitterIcon color='primary' className={classes.dialogIcon} />
                         <DialogTitle id="form-dialog-title">Создайте учетную запись</DialogTitle>
                         <DialogContent>
+                        <FormControl>
                             <TextField
                                 autoFocus
                                 variant="outlined"
                                 margin="dense"
-                                id="outlined-basic"
+                                id="name"
                                 label="Имя"
-                                type="name"
                                 fullWidth
                                 style={{marginBottom: 10}}
                             />
@@ -144,9 +145,8 @@ export function SignIn() {
                                 autoFocus
                                 variant="outlined"
                                 margin="dense"
-                                id="outlined-basic"
+                                id="number"
                                 label="Телефон"
-                                type="name"
                                 fullWidth
                                 style={{height: 60}}
                             />
@@ -159,7 +159,6 @@ export function SignIn() {
                                 margin="dense"
                                 id="mounth"
                                 label="Мясяц"
-                                type="name"
                                 fullWidth
                                 style={{marginBottom: 10}}
                             />
@@ -169,7 +168,6 @@ export function SignIn() {
                                 margin="dense"
                                 id="day"
                                 label="День"
-                                type="name"
                                 fullWidth
                                 style={{marginBottom: 10}}
                             />
@@ -179,10 +177,10 @@ export function SignIn() {
                                 margin="dense"
                                 id="year"
                                 label="Год"
-                                type="name"
                                 fullWidth
                                 style={{marginBottom: 10}}
                             />
+                            </FormControl>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} color="primary" variant='contained'  fullWidth>
@@ -190,7 +188,7 @@ export function SignIn() {
                             </Button>
                         </DialogActions>
                     </Dialog>
-                    
+                
                 </div>
             </section>
         </div>
