@@ -1,65 +1,78 @@
-import React from 'react'
-import { IconButton, Paper, Typography, Container, Grid, makeStyles, withStyles, Avatar, InputBase  } from '@material-ui/core'
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import RepeatIcon from '@material-ui/icons/Repeat'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ReplyIcon from '@material-ui/icons/Reply';
-import classnames from 'classnames'
-import { useHomeStyle } from '../pages/Home';
+import React from "react";
+import {
+  IconButton,
+  Paper,
+  Typography,
+  Container,
+  Grid,
+  makeStyles,
+  withStyles,
+  Avatar,
+  InputBase,
+} from "@material-ui/core";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import RepeatIcon from "@material-ui/icons/Repeat";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import ReplyIcon from "@material-ui/icons/Reply";
+import classnames from "classnames";
+import { useHomeStyle } from "../pages/Home";
 
 interface TweetProps {
-    text: string
-    classes: ReturnType<typeof useHomeStyle>;
-    user:{
-        fullname: string;
-        username: string;
-        avatarUrl: string;
-    }
-    
+  text: string;
+  classes: ReturnType<typeof useHomeStyle>;
+  user: {
+    fullname: string;
+    username: string;
+    avatarUrl: string;
+  };
 }
 
-export const Tweet: React.FC<TweetProps> = ({classes, text, user}: TweetProps): React.ReactElement => {
-    return (
-            <Paper className={classnames(classes.tweetsHeader, classes.tweetBody)}>
-              <Grid container spacing={3}>
-                <Grid item xs={1}><Avatar className={classes.tweetAvatar} alt="Travis Howard" src={user.avatarUrl} /></Grid>
-                <Grid item xs={11}>
-                  <Typography> 
-                    <b>{user.fullname}</b>
-                    <span className={classes.tweetsUserName}> @{user.username}</span>&nbsp;
-                    <span className={classes.tweetsUserName}>.</span>&nbsp;
-                    <span className={classes.tweetsUserName}>1 ч</span>
-                  </Typography>
-                  <Typography variant='body1'>
-                  {text}
-                  </Typography>
-                  <div className={classes.tweetsFooter}>
-                    <div>
-                      <IconButton color='primary'>
-                        <ChatBubbleOutlineIcon style={{ fontSize: 20 }} />
-                      </IconButton>
-                      <span>1</span>
-                    </div>
-                    <div>
-                      <IconButton color='primary'>
-                        <RepeatIcon style={{ fontSize: 20 }} />
-                      </IconButton>
-                    </div>
-                    <div>
-                      <IconButton color='primary'>
-                        <FavoriteBorderIcon style={{ fontSize: 20 }} />
-                      </IconButton>
-                      <span>1</span>
-                    </div>
-                    <div>
-                      <IconButton color='primary'>
-                        <ReplyIcon style={{ fontSize: 20 }} />
-                      </IconButton>
-                    </div>
-                  </div>
-                </Grid>
-              </Grid>
-            </Paper>
-    )
-}
-
+export const Tweet: React.FC<TweetProps> = ({
+  classes,
+  text,
+  user,
+}: TweetProps): React.ReactElement => {
+  return (
+    <Paper className={classnames(classes.tweetsHeader, classes.tweetBody)}>
+          <Avatar
+            className={classes.tweetAvatar}
+            alt="Travis Howard"
+            src={user.avatarUrl}
+          />
+          <div>
+          <Typography>
+            <b>{user.fullname}</b>
+            <span className={classes.tweetsUserName}> @{user.username}</span>
+            &nbsp;
+            <span className={classes.tweetsUserName}>.</span>&nbsp;
+            <span className={classes.tweetsUserName}>1 ч</span>
+          </Typography>
+          <Typography variant="body1">{text}</Typography>
+          <div className={classes.tweetsFooter}>
+            <div>
+              <IconButton color="primary">
+                <ChatBubbleOutlineIcon style={{ fontSize: 20 }} />
+              </IconButton>
+              <span>1</span>
+            </div>
+            <div>
+              <IconButton color="primary">
+                <RepeatIcon style={{ fontSize: 20 }} />
+              </IconButton>
+            </div>
+            <div>
+              <IconButton color="primary">
+                <FavoriteBorderIcon style={{ fontSize: 20 }} />
+              </IconButton>
+              <span>1</span>
+            </div>
+            <div>
+              <IconButton color="primary">
+                <ReplyIcon style={{ fontSize: 20 }} />
+              </IconButton>
+            </div>
+          </div>
+          </div>
+    </Paper>
+  );
+};
