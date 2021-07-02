@@ -33,7 +33,7 @@ export const Tweet: React.FC<TweetProps> = ({
   user,
 }: TweetProps): React.ReactElement => {
   return (
-    <Paper className={classnames(classes.tweetsHeader, classes.tweetBody)}>
+    <Paper variant="outlined" className={classes.tweetBody}>
           <Avatar
             className={classes.tweetAvatar}
             alt="Travis Howard"
