@@ -1,18 +1,11 @@
 import React from "react";
 import {
   IconButton,
-  Paper,
   Typography,
-  Container,
-  Grid,
-  makeStyles,
-  withStyles,
-  Avatar,
-  InputBase,
   Button,
   Hidden,
 } from "@material-ui/core";
-import { useHomeStyle } from "../pages/Home";
+import { useHomeStyle } from "../pages/Home/theme";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";

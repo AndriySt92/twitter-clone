@@ -3,19 +3,13 @@ import {
   IconButton,
   Paper,
   Typography,
-  Container,
-  Grid,
-  makeStyles,
-  withStyles,
   Avatar,
-  InputBase,
 } from "@material-ui/core";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ReplyIcon from "@material-ui/icons/Reply";
-import classnames from "classnames";
-import { useHomeStyle } from "../pages/Home";
+import { useHomeStyle } from "../pages/Home/theme";
 
 interface TweetProps {
   text: string;
