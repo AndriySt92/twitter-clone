@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Tweet } from '../../Component/Tweet'
 import {
-  IconButton,
   Paper,
   Typography,
   Container,
@@ -18,15 +18,17 @@ import {
 import { MenuList } from '../../Component/MenuList'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import SearchIcon from '@material-ui/icons/Search'
-import {useHomeStyle} from './theme'
-import {SearchTextField} from '../../Component/SearchTextForm'
-import {TweetForm} from '../../Component/TweetForm'
-
-
-
+import { useHomeStyle } from './theme'
+import { SearchTextField } from '../../Component/SearchTextForm'
+import { TweetForm } from '../../Component/TweetForm'
+import { fetchTweets } from '../../redux/tweets/actions'
 
 export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchTweets())
+  }, [])
 
   return (
     <Container className={classes.wrapper} maxWidth="lg">
@@ -39,10 +41,10 @@ export const Home: React.FC = (): React.ReactElement => {
             <Paper variant="outlined" className={classes.tweetsHeader}>
               <Typography variant="h6">Главная</Typography>
             </Paper>
-            <div>
-              <TweetForm classes={classes}/>
-              <div className={classes.tweetFormBottomLine}></div>
-            </div>
+            <Paper style={{ borderBottom: '1px solid #e0e0e0' }}>
+              <TweetForm classes={classes} />
+            </Paper>
+            <div className={classes.tweetFormBottomLine}></div>
             {Array(20)
               .fill(0)
               .map((item) => (

@@ -1,0 +1,115 @@
+{
+    "tweets": [
+        {
+          "_id": "60e44cf1562c36ed0e6c4710",
+          "text": "Enim Lorem nostrud sint anim duis nostrud id do reprehenderit. Aliquip ullamco do et occaecat aute in nisi amet reprehenderit aliquip aliquip non est tempor.",
+          "user": {
+            "fullname": "Claire Vega",
+            "username": "@YoungMiranda",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?1"
+          }
+        },
+        {
+          "_id": "60e44cf1778e8c77018dfd8b",
+          "text": "Id deserunt amet adipisicing excepteur id tempor ullamco exercitation sunt Lorem. Sint ut ut minim occaecat irure aliqua ipsum esse dolor.",
+          "user": {
+            "fullname": "Amie Spencer",
+            "username": "@JoanSnider",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?6"
+          }
+        },
+        {
+          "_id": "60e44cf193b9e34e557670d5",
+          "text": "Irure do mollit id laborum commodo ut sunt sit. Quis occaecat anim laborum anim occaecat.",
+          "user": {
+            "fullname": "Bowen Hunt",
+            "username": "@ReidRaymond",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?4"
+          }
+        },
+        {
+          "_id": "60e44cf12a6cc6dc42677e4d",
+          "text": "Ea ea nulla aliquip mollit id laboris dolor qui cillum enim sunt laborum reprehenderit est. Anim laboris reprehenderit esse eu est voluptate eiusmod nulla eu incididunt ipsum ad.",
+          "user": {
+            "fullname": "Dodson Gilliam",
+            "username": "@GreenHolden",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?1"
+          }
+        },
+        {
+          "_id": "60e44cf1e21a33e1e1b82019",
+          "text": "Irure voluptate amet et do ex esse. Anim id adipisicing id ipsum id reprehenderit adipisicing officia in eiusmod.",
+          "user": {
+            "fullname": "Guadalupe Jenkins",
+            "username": "@NoraBooker",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?10"
+          }
+        },
+        {
+          "_id": "60e44cf115cf63dc6410cb68",
+          "text": "Officia aliquip sint id consectetur id id occaecat adipisicing. Adipisicing laboris labore ut sit laboris incididunt anim in esse duis eu proident laborum.",
+          "user": {
+            "fullname": "Luisa Blackwell",
+            "username": "@NadiaBerger",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?7"
+          }
+        },
+        {
+          "_id": "60e44cf1c321024bfb7b266e",
+          "text": "Cupidatat ipsum magna ea ut ex aute occaecat mollit aute fugiat minim occaecat. Officia pariatur labore occaecat consectetur esse exercitation excepteur.",
+          "user": {
+            "fullname": "Claudia Kramer",
+            "username": "@SharpKerr",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?4"
+          }
+        },
+        {
+          "_id": "60e44cf1cfea2ad65f8c3209",
+          "text": "Sit qui quis mollit anim exercitation minim tempor cupidatat anim. Nisi eu incididunt occaecat qui.",
+          "user": {
+            "fullname": "Leta Dennis",
+            "username": "@VelasquezBrooks",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?4"
+          }
+        },
+        {
+          "_id": "60e44cf1d773d4424e417456",
+          "text": "Et laboris cupidatat dolor reprehenderit quis sint qui consectetur ea cupidatat labore. Culpa labore officia sint culpa minim adipisicing irure quis quis ea eiusmod in reprehenderit sunt.",
+          "user": {
+            "fullname": "Berger Kidd",
+            "username": "@MavisGalloway",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?3"
+          }
+        },
+        {
+          "_id": "60e44cf17fcbfda4c2b1780e",
+          "text": "Occaecat ad sunt sint magna elit nisi pariatur. Consequat consequat reprehenderit aliquip mollit veniam tempor exercitation culpa duis irure ea in eu culpa.",
+          "user": {
+            "fullname": "Angelica Flynn",
+            "username": "@BrandiMercer",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?10"
+          }
+        },
+        {
+          "_id": "60e44cf13facd6b673487dfe",
+          "text": "Eu ut aliquip incididunt do. Reprehenderit voluptate quis aliqua nulla et minim velit culpa nostrud eiusmod cillum.",
+          "user": {
+            "fullname": "Robbins Brady",
+            "username": "@SamanthaRobertson",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?2"
+          }
+        },
+        {
+          "_id": "60e44cf14100df2a98d2d1de",
+          "text": "Laborum pariatur qui cillum ex. Elit culpa nostrud cupidatat enim adipisicing et nostrud do ea sunt.",
+          "user": {
+            "fullname": "Gale Swanson",
+            "username": "@MedinaHardy",
+            "avatarUrl": "https://source.unsplash.com/user/erondu/100x100?4"
+          }
+        }
+      ],
+    "tweet":[{"id":"231", "username": "Viv", "tweetText": "Nice & shiny. No filter or edits! Color just pops", "shareCount": "12313", "likeCount": "213213"}],
+    "users":[{"id": "1313", "username": "President Biden"}],
+    "topics":[{"id": "31312", "topicTitle":"Актуальные темы: Украина", "topicTag":"#nsfwِ", "count": "14134"}]
+}
