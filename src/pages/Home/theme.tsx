@@ -53,6 +53,7 @@ export const useHomeStyle = makeStyles((theme) => ({
   },
   tweetsHeader: {
     display: 'flex',
+    alignItems: 'center',
     flexDirection: 'row',
     position: 'sticky',
     zIndex: 2,
@@ -68,6 +69,10 @@ export const useHomeStyle = makeStyles((theme) => ({
     marginRight: 15,
     width: theme.spacing(6),
     height: theme.spacing(6),
+  },
+  tweetWrapper: {
+    color: 'inherit',
+    textDecoration: '0',
   },
   tweetBody: {
     display: 'flex',
@@ -224,5 +229,9 @@ export const useHomeStyle = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: '#edf3f6',
     },
+    '& a': {
+      color: 'inherit',
+      textDecoration: '0'
+    }
   },
 }))

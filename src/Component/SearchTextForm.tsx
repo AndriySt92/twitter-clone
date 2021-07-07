@@ -34,7 +34,7 @@ export const SearchTextField = withStyles({
         },
       },
       '& .MuiOutlinedInput-input': {
-        // padding: '12px 14px 14px 5px',
+        padding: '10.5px 11px'
       },
     },
   })(TextField)

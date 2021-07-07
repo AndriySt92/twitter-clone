@@ -89,7 +89,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
                     style={{ color: 'rgba(0,0,0,0.1)' }}
                   />
                 </div>
-                <p></p>
+                <div style={{ width: 1, height: 33, backgroundColor: '#dedede' }}></div>
                 <IconButton className={classes.tweetFormFooterIcon}>
                   <ControlPointIcon />
                 </IconButton>

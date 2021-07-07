@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
+import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Preloader } from '../../Component/Preloader'
 import { Tweet } from '../../Component/Tweet'
 import {
   Paper,
@@ -14,6 +16,7 @@ import {
   Divider,
   Button,
   InputAdornment,
+  IconButton,
 } from '@material-ui/core'
 import { MenuList } from '../../Component/MenuList'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
@@ -22,12 +25,20 @@ import { useHomeStyle } from './theme'
 import { SearchTextField } from '../../Component/SearchTextForm'
 import { TweetForm } from '../../Component/TweetForm'
 import { fetchTweets } from '../../redux/tweets/actions'
+import { getLoadingStatusTweets, getTweets } from '../../redux/tweets/selectors'
+import { fetchTopics } from '../../redux/topics/actions'
+import { Topics } from '../../Component/Topics'
+import BackButton from '../../Component/BackButton'
 
 export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
   const dispatch = useDispatch()
+  const tweets = useSelector(getTweets)
+  const isLoadingTweets = useSelector(getLoadingStatusTweets)
+
   useEffect(() => {
     dispatch(fetchTweets())
+    dispatch(fetchTopics())
   }, [])
 
   return (
@@ -39,28 +50,43 @@ export const Home: React.FC = (): React.ReactElement => {
         <Grid item sm={8} md={6}>
           <Paper variant="outlined" className={classes.tweetsWrapper}>
             <Paper variant="outlined" className={classes.tweetsHeader}>
-              <Typography variant="h6">Главная</Typography>
-            </Paper>
-            <Paper style={{ borderBottom: '1px solid #e0e0e0' }}>
-              <TweetForm classes={classes} />
-            </Paper>
-            <div className={classes.tweetFormBottomLine}></div>
-            {Array(20)
-              .fill(0)
-              .map((item) => (
-                <Tweet
-                  classes={classes}
-                  user={{
-                    fullname: 'Sergio Ramoz',
-                    username: 'SergioRamoz',
-                    avatarUrl:
-                      'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+              <Route path="/home/:any">
+                <BackButton />
+              </Route>
+              <Route path="/home" exact>
+                <Typography variant="h6">Главная</Typography>
+              </Route>
+              <Route path="/home/tweet">
+                <Typography variant="h6">Твит</Typography>
+              </Route>
+              <Route path="/home/search">
+                <SearchTextField
+                  variant="outlined"
+                  id="custom-css-outlined-input"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
                   }}
-                  text={
-                    'Desde finales del siglo XX, Internet ha cambiado nuestra forma de vivir en muchos aspectos. Uno de ellos, es el modo en que compramos. '
-                  }
+                  fullWidth
                 />
-              ))}
+              </Route>
+            </Paper>
+            <Route path={['/home', '/home/search']} exact>
+              <Paper style={{ borderBottom: '1px solid #e0e0e0' }}>
+                <TweetForm classes={classes} />
+              </Paper>
+              <div className={classes.tweetFormBottomLine}></div>
+            </Route>
+            <Route path="/home" exact>
+              {isLoadingTweets ? (
+                <Preloader />
+              ) : (
+                tweets.map((tweet) => <Tweet key={tweet._id} classes={classes} {...tweet} />)
+              )}
+            </Route>
           </Paper>
         </Grid>
         <Grid item sm={4} md={4}>
@@ -77,61 +103,7 @@ export const Home: React.FC = (): React.ReactElement => {
               }}
               fullWidth
             />
-            <Paper className={classes.rightSideBlock} elevation={0}>
-              <Paper className={classes.rightSideBlockHeader} variant="outlined">
-                <b>Актуальные темы</b>
-              </Paper>
-              <List>
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Актуальные темы: Украина"
-                    secondary={
-                      <>
-                        <Typography component="span" variant="body1">
-                          Telegram
-                        </Typography>
-                        <Typography component="div" variant="body1">
-                          Твитов: 154 132
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Актуальные темы: Украина"
-                    secondary={
-                      <>
-                        <Typography component="span" variant="body1">
-                          #teen
-                        </Typography>
-                        <Typography component="div" variant="body1">
-                          Твитов: 154 132
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemText
-                    primary="Актуальные темы: Украина"
-                    secondary={
-                      <>
-                        <Typography component="span" variant="body1">
-                          #Ukrain
-                        </Typography>
-                        <Typography component="div" variant="body1">
-                          Твитов: 154 132
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <Divider component="li" />
-              </List>
-            </Paper>
+            <Topics classes={classes} />
             <Paper className={classes.rightSideBlock} elevation={0}>
               <Paper variant="outlined" className={classes.rightSideBlockHeader}>
                 <b>Кого читать</b>

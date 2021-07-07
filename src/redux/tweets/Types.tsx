@@ -1,15 +1,17 @@
-export interface Tweets {
-    id:string,
+import {LoadingStatus} from '../Types'
+
+interface User {
+    fullname: string,
     username: string,
-    post: string,
+    avatarUrl: string
+}
+export interface Tweets {
+    _id:string,
+    user: User,
+    text: string,
 
 }
-export enum LoadingStatus {
-    LOADED = "LOADED",
-    LOADING = "LOADING",
-    ERORR = 'ERROR',
-    NEVER = "NEVER",
-}
+
 
 export interface TweetsState {
     tweets: Tweets[],
