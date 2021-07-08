@@ -24,6 +24,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { useHomeStyle } from './theme'
 import { SearchTextField } from '../../Component/SearchTextForm'
 import { TweetForm } from '../../Component/TweetForm'
+import { TweetPage } from '../../Component/TweetPage'
 import { fetchTweets } from '../../redux/tweets/actions'
 import { getLoadingStatusTweets, getTweets } from '../../redux/tweets/selectors'
 import { fetchTopics } from '../../redux/topics/actions'
@@ -56,8 +57,8 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/home" exact>
                 <Typography variant="h6">Главная</Typography>
               </Route>
-              <Route path="/home/tweet">
-                <Typography variant="h6">Твит</Typography>
+              <Route path="/home/tweet/:id">
+              <Typography variant="h6">Твит</Typography>
               </Route>
               <Route path="/home/search">
                 <SearchTextField
@@ -79,6 +80,9 @@ export const Home: React.FC = (): React.ReactElement => {
                 <TweetForm classes={classes} />
               </Paper>
               <div className={classes.tweetFormBottomLine}></div>
+            </Route>
+            <Route path="/home/tweet/:id">
+              <TweetPage />
             </Route>
             <Route path="/home" exact>
               {isLoadingTweets ? (

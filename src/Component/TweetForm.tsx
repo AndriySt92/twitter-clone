@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { IconButton, Avatar, TextareaAutosize, CircularProgress, Button } from '@material-ui/core'
 import PublicIcon from '@material-ui/icons/Public'
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined'
@@ -8,6 +9,7 @@ import BarChartIcon from '@material-ui/icons/BarChart'
 import MoodIcon from '@material-ui/icons/Mood'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
 import { useHomeStyle } from '../pages/Home/theme'
+import { addTweet } from '../redux/tweets/actions'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -16,6 +18,7 @@ interface TweetFormProps {
 export const TweetForm: React.FC<TweetFormProps> = ({
   classes,
 }: TweetFormProps): React.ReactElement => {
+  const dispatch = useDispatch()
   const [text, setText] = useState<string>('')
   const textPercent = Math.round((text.length / 280) * 100)
   const maxLength = 280 - text.length
@@ -24,6 +27,11 @@ export const TweetForm: React.FC<TweetFormProps> = ({
     if (e.currentTarget) {
       setText(e.currentTarget.value)
     }
+  }
+
+  const handlerClickAddTweet = () => {
+    dispatch(addTweet(text))
+    setText('')
   }
 
   return (
@@ -97,6 +105,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
             )}
           </div>
           <Button
+            onClick={handlerClickAddTweet}
             disabled={text.length < 1 || text.length > 280}
             className={classes.tweetFormFooterButton}
             variant="contained"

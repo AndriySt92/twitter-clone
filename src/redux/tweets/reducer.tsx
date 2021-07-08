@@ -29,6 +29,11 @@ export const tweetsReducer = (
          ...state,
          loadingStatus: action.payload
        }
+       case TweetsActionType.SET_ADDED_TWEET: 
+       return {
+         ...state,
+         tweets: [action.payload, ...state.tweets]
+       }
     default:
       return state
   }

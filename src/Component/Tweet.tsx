@@ -8,14 +8,14 @@ import ReplyIcon from '@material-ui/icons/Reply'
 import { useHomeStyle } from '../pages/Home/theme'
 
 interface TweetProps {
-  _id: string
-  text: string
+  _id: string 
+  text: string 
   classes: ReturnType<typeof useHomeStyle>
   user: {
     fullname: string
     username: string
     avatarUrl: string
-  }
+  } 
 }
 
 export const Tweet: React.FC<TweetProps> = ({
@@ -24,6 +24,7 @@ export const Tweet: React.FC<TweetProps> = ({
   user,
   _id,
 }: TweetProps): React.ReactElement => {
+
   return (
       <Link to={`/home/tweet/${_id}`} className={classes.tweetWrapper}>
         <Paper variant="outlined" className={classes.tweetBody}>

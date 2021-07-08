@@ -5,15 +5,14 @@ interface User {
     username: string,
     avatarUrl: string
 }
-export interface Tweets {
+export interface Tweet {
     _id:string,
     user: User,
     text: string,
-
 }
 
 
 export interface TweetsState {
-    tweets: Tweets[],
+    tweets: Tweet[],
     loadingStatus: LoadingStatus
 }
