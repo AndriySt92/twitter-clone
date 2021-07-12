@@ -5,7 +5,6 @@ import {LoadingStatus} from '../Types'
 
 function* fetchTweetRequest({payload: tweetId} : FetchTweetActionType): any {
   try{
-    debugger
     const tweet = yield call(tweetsApi.fetchTweetData, tweetId)
     //tweet is array so we need get elem by 0 index
     yield put(setTweet(tweet[0]))
