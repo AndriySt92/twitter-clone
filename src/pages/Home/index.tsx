@@ -26,7 +26,7 @@ import { SearchTextField } from '../../Component/SearchTextForm'
 import { TweetForm } from '../../Component/TweetForm'
 import { TweetPage } from '../../Component/TweetPage'
 import { fetchTweets } from '../../redux/tweets/actions'
-import { getLoadingStatusTweets, getTweets } from '../../redux/tweets/selectors'
+import { getLoadingStatusFetchTweets, getTweets } from '../../redux/tweets/selectors'
 import { fetchTopics } from '../../redux/topics/actions'
 import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
@@ -35,7 +35,7 @@ export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
   const dispatch = useDispatch()
   const tweets = useSelector(getTweets)
-  const isLoadingTweets = useSelector(getLoadingStatusTweets)
+  const isLoadingTweets = useSelector(getLoadingStatusFetchTweets)
 
   useEffect(() => {
     dispatch(fetchTweets())
@@ -44,8 +44,8 @@ export const Home: React.FC = (): React.ReactElement => {
 
   return (
     <Container className={classes.wrapper} maxWidth="lg">
-      <Grid container spacing={3}>
-        <Grid item sm={1} md={2}>
+      <Grid container spacing={4}>
+        <Grid item sm={1} md={2} >
           <MenuList classes={classes} />
         </Grid>
         <Grid item sm={8} md={6}>
@@ -58,7 +58,7 @@ export const Home: React.FC = (): React.ReactElement => {
                 <Typography variant="h6">Главная</Typography>
               </Route>
               <Route path="/home/tweet/:id">
-              <Typography variant="h6">Твит</Typography>
+                <Typography variant="h6">Твит</Typography>
               </Route>
               <Route path="/home/search">
                 <SearchTextField
@@ -93,7 +93,7 @@ export const Home: React.FC = (): React.ReactElement => {
             </Route>
           </Paper>
         </Grid>
-        <Grid item sm={4} md={4}>
+        <Grid item sm={3} md={4}>
           <div className={classes.rightSide}>
             <SearchTextField
               variant="outlined"

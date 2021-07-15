@@ -1,7 +1,15 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { IconButton, Avatar, TextareaAutosize, CircularProgress, Button } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  IconButton,
+  Avatar,
+  TextareaAutosize,
+  CircularProgress,
+  Button,
+  Snackbar,
+} from '@material-ui/core'
 import PublicIcon from '@material-ui/icons/Public'
+import CloseIcon from '@material-ui/icons/Close'
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined'
 import GifIcon from '@material-ui/icons/Gif'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
@@ -10,6 +18,8 @@ import MoodIcon from '@material-ui/icons/Mood'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
 import { useHomeStyle } from '../pages/Home/theme'
 import { addTweet } from '../redux/tweets/actions'
+import { getLoadingStatusAddTweet } from '../redux/tweets/selectors'
+import { LoadingStatus } from '../redux/Types'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -18,10 +28,22 @@ interface TweetFormProps {
 export const TweetForm: React.FC<TweetFormProps> = ({
   classes,
 }: TweetFormProps): React.ReactElement => {
-  const dispatch = useDispatch()
   const [text, setText] = useState<string>('')
+  const [visibleSnackbar, setVisibleSnackbar] = useState<boolean>(false)
+  const dispatch = useDispatch()
+  const isLoadingAddTweet = useSelector(getLoadingStatusAddTweet)
   const textPercent = Math.round((text.length / 280) * 100)
   const maxLength = 280 - text.length
+
+  useEffect(() => {
+    if (isLoadingAddTweet === 'ERROR') {
+      setVisibleSnackbar(true)
+    }
+  }, [isLoadingAddTweet])
+
+  const handlerCloseSnackbar = () => {
+    setVisibleSnackbar(false)
+  }
 
   const handlerChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     if (e.currentTarget) {
@@ -110,8 +132,33 @@ export const TweetForm: React.FC<TweetFormProps> = ({
             className={classes.tweetFormFooterButton}
             variant="contained"
             color="primary">
-            Твитнуть
+            {isLoadingAddTweet === LoadingStatus.LOADING ? (
+              <CircularProgress size={16} color="inherit" />
+            ) : (
+              'Твитнуть'
+            )}
           </Button>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            autoHideDuration={6000}
+            open={visibleSnackbar}
+            onClose={handlerCloseSnackbar}
+            message="Ошибка! Твит не добавился"
+            action={
+              <React.Fragment>
+                <IconButton
+                  size="small"
+                  aria-label="close"
+                  color="inherit"
+                  onClick={handlerCloseSnackbar}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
         </div>
       </div>
     </div>

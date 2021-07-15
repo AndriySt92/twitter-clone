@@ -125,6 +125,56 @@ export const useHomeStyle = makeStyles((theme) => ({
       },
     },
   },
+  tweetPage: {
+    padding: 12,
+    borderRight: '0',
+    borderLeft: '0',
+    borderTop: '0',
+  },
+  tweetPageHeader: {
+    position: 'relative',
+    '& button': {
+      position: 'absolute',
+      top: -10,
+      right: -10,
+    },
+  },
+  tweetPageUser: {
+    display: 'flex',
+    marginBottom: 20,
+  },
+  tweetPageTweetBody: {},
+  tweetPageText: {
+    '& p': {
+      lineHeight: 1.3,
+      fontSize: 23,
+    },
+  },
+  tweetPageMark: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    padding: '15px 0px',
+    margin: '5px 0px',
+    borderTop: '1px solid #eff3f4',
+    borderBottom: '1px solid #eff3f4',
+    '& .MuiTypography-h6': {
+      fontSize: 17,
+      fontWeight: 700,
+    },
+    '& .MuiTypography-body1': {
+      color: '#505457',
+    },
+  },
+  tweetPageIconButton: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    paddingBottom: '5px',
+    borderBottom: '1px solid #eff3f4',
+    '& svg': {
+      fontSize: 20,
+    },
+  },
+  tweetPageTextarea: {},
   tweetFormPublicIcon: {
     fontSize: 16,
   },
@@ -179,9 +229,9 @@ export const useHomeStyle = makeStyles((theme) => ({
     width: 450,
   },
   tweetFormBottomLine: {
-      height: 12,
-      width: '100%',
-      backgroundColor: "#f7f9f9"
+    height: 12,
+    width: '100%',
+    backgroundColor: '#f7f9f9',
   },
   rightSide: {
     paddingTop: 20,
@@ -209,6 +259,7 @@ export const useHomeStyle = makeStyles((theme) => ({
   },
   rightSideBlockItem: {
     cursor: 'pointer',
+    alignItems: 'flex-start',
     '& .MuiTypography-body1': {
       '& span': {
         fontWeight: 200,
@@ -231,7 +282,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     },
     '& a': {
       color: 'inherit',
-      textDecoration: '0'
-    }
+      textDecoration: '0',
+    },
   },
 }))
