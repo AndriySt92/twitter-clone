@@ -9,6 +9,6 @@ const options = {
     }
 }
 
-const transport = nodemailer.createTransport(options)
+export const transport = nodemailer.createTransport(options)
 
-export default transport
+ 

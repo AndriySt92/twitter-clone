@@ -1,21 +1,27 @@
 {
     "compilerOptions": {
       "module": "commonjs",
-      "target": "es6",
+      "target": "es5",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowJs": false,
+      "noEmit": true,
       "strict": true,
-      "noImplicitAny": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "isolatedModules": false, 
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "sourceMap": true,
-      "baseUrl": ".",
-      "resolveJsonModule": true
+      "lib": ["dom", "DOM.Iterable", "esnext"],
+      "resolveJsonModule": true,
+      "jsx": "react"
     },
+    "files": ["./node_modules/@types/node/index.d.ts"],
     "include": [
-      "./src"
+      "src/**/*.ts"
     ],
     "exclude": [
       "./node_modules",
-    ]
+    ],
+    "typeRoots": ["./node_modules/@types"]
   }

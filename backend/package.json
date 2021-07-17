@@ -4,6 +4,7 @@
   "description": "Twitter backend",
   "main": "index.js",
   "dependencies": {
+    "@types/crypto-js": "^4.0.2",
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
     "@types/nodemailer": "^6.4.4",
