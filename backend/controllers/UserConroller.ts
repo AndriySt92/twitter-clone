@@ -1,5 +1,6 @@
 import express = require('express')
 import { validationResult } from 'express-validator'
+import { isValidObjectId } from 'mongoose'
 import { UserModel, UserSchemaInterface } from '../models/UserModel'
 import { generateMD5 } from '../utils/generateHash'
 import { sendEmail } from '../utils/sendEmail'
@@ -24,6 +25,36 @@ class UserController {
         }
     }
 
+    async show(req: express.Request, res: express.Response): Promise<void> {
+        try{
+            const userId = req.params.id
+
+           if(!isValidObjectId(userId)){
+               res.status(400).send()
+               return
+           }
+
+            const user = await UserModel.findById(userId).exec()
+           
+            if(!user){
+                res.status(404).send()
+                return 
+            }
+   
+            res.json({
+                status: 'success',
+                data: user
+            })
+
+            
+        } catch(error){
+            res.json({
+                status: 'error',
+                message: JSON.stringify(error)
+            })
+        }
+    }
+
     async create(req: express.Request, res: express.Response): Promise<void> {
         try {
             const errors = validationResult(req)
@@ -37,6 +68,7 @@ class UserController {
                 username: req.body.username,
                 fullname: req.body.fullname,
                 password: req.body.password,
+                //TODO - Passport doesn't work with this password: generateMD5(req.body.password + process.env.SECRET_KEY)
                 confirmHash: generateMD5(process.env.SECRET_KEY || Math.random().toString()) 
             }
 
@@ -70,13 +102,17 @@ class UserController {
     }
     async verify(req: express.Request, res: express.Response): Promise<void> {
         try{
-            const hash = req.query.hash
+            //TODO - this method doesn't work
+            // const hash = req.query.hash
+            const hash = Object.keys(req.query)[0]
+
             if(!hash){
                 res.status(400).send()
                 return 
             }
-            //@ts-ignore
+           
             let user = await UserModel.findOne({confirmHash: hash}).exec()
+    
             if(user){
                 user.confirmed = true
                 user.save()
@@ -85,11 +121,11 @@ class UserController {
                     status: 'success',
                     data: user
                 })
+                  
             } else {
                 res.status(404).json({status: 'error', message: 'Пользыватель не найден'})
             }
-           
-            
+         
         } catch(error){
             res.status(500).json({
                 status: 'error',

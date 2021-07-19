@@ -23,7 +23,6 @@ transport.sendMail(
         subject:subject,
         html: html,
     },
-    //
     callback ||
     function (err: Error | null) {
         if(err) {
