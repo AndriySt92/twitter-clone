@@ -1,4 +1,4 @@
-import nodemailer = require('nodemailer')
+import nodemailer from 'nodemailer'
 
 const options = {
     host: process.env.NODEMAILER_HOST || 'smtp.mailtrap.io',

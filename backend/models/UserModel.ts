@@ -13,8 +13,8 @@ export interface UserSchemaInterface {
     website?:string;
 }
 
-type UserSchemaDocumentInterface = UserSchemaInterface & Document
-const UserSchema = new Schema({
+export type UserSchemaDocumentInterface = UserSchemaInterface & Document
+const UserSchema = new Schema<UserSchemaInterface>({
     email: {
         unique: true,
         required:true,

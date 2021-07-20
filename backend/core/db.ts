@@ -1,4 +1,4 @@
-import mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/twitter',{
     useNewUrlParser: true,

@@ -1,10 +1,11 @@
-import express = require('express')
+import express from 'express'
 import { validationResult } from 'express-validator'
 import { isValidObjectId } from 'mongoose'
-import { UserModel, UserSchemaInterface } from '../models/UserModel'
+import { UserModel, UserSchemaDocumentInterface, UserSchemaInterface } from '../models/UserModel'
 import { generateMD5 } from '../utils/generateHash'
 import { sendEmail } from '../utils/sendEmail'
-// import SendmailTransport =  require("nodemailer/lib/sendmail-transport")
+import jwt from 'jsonwebtoken'
+// import SendmailTransport from "nodemailer/lib/sendmail-transport"
 
 class UserController {
     async index(_: any, res: express.Response): Promise<void> {
@@ -18,9 +19,9 @@ class UserController {
 
             
         } catch(error){
-            res.json({
+            res.status(500).json({
                 status: 'error',
-                message: JSON.stringify(error)
+                message: error
             })
         }
     }
@@ -48,9 +49,9 @@ class UserController {
 
             
         } catch(error){
-            res.json({
+            res.status(500).json({
                 status: 'error',
-                message: JSON.stringify(error)
+                message: error
             })
         }
     }
@@ -78,7 +79,7 @@ class UserController {
                 emailFrom: 'admin@twitter-clone.com',
                 emailTo: data.email,
                 subject: "Потверждение почты Twitter Clone",
-                html: `Для того чтобы потвердить почту перейдите <a href="http://localhost:${process.env.PORT || 8888}/user/verify?hash=${data.confirmHash}">по этой ссылке</a>`,
+                html: `Для того чтобы потвердить почту перейдите <a href="http://localhost:${process.env.PORT || 8888}/auth/verify?hash=${data.confirmHash}">по этой ссылке</a>`,
             }, (err: Error | null) =>{
                 if(err == null) {
                     res.json({
@@ -96,30 +97,28 @@ class UserController {
         } catch (error) {
             res.status(500).json({
                 status: 'error',
-                message: JSON.stringify(error)
+                message: error
             })
         }
     }
     async verify(req: express.Request, res: express.Response): Promise<void> {
         try{
-            //TODO - this method doesn't work
-            // const hash = req.query.hash
-            const hash = Object.keys(req.query)[0]
 
+            const hash = req.query.hash
+            
             if(!hash){
                 res.status(400).send()
                 return 
             }
-           
+           //@ts-ignore
             let user = await UserModel.findOne({confirmHash: hash}).exec()
-    
+            console.log(user)
             if(user){
                 user.confirmed = true
                 user.save()
     
                 res.json({
                     status: 'success',
-                    data: user
                 })
                   
             } else {
@@ -129,7 +128,42 @@ class UserController {
         } catch(error){
             res.status(500).json({
                 status: 'error',
-                message: JSON.stringify(error)
+                message: error
+            })
+        }
+    }
+
+    async afterLogin(req: express.Request, res: express.Response): Promise<void> {
+
+        try {
+            const user = req.user ? (req.user as UserSchemaDocumentInterface).toJSON() : undefined
+
+            res.json({
+                status: "success",
+                data: {...user, token: jwt.sign({data: req.user}, process.env.SECRET_KEY || '123', {expiresIn: '30 days'})}
+            })
+        } catch (error) {
+            res.status(500).json({
+                status: 'error',
+                message: error
+            })
+        }
+    }
+
+
+    async getUserInfo(req: express.Request, res: express.Response): Promise<void> {
+
+        try {
+            const user = req.user ? (req.user as UserSchemaDocumentInterface).toJSON() : undefined
+
+            res.json({
+                status: "success",
+                data: user
+            })
+        } catch (error) {
+            res.status(500).json({
+                status: 'error',
+                message: error
             })
         }
     }

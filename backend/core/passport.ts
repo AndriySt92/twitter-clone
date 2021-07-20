@@ -1,6 +1,7 @@
 import passport from 'passport'
-const LocalStrategy = require('passport-local').Strategy;
-import { UserModel } from '../models/UserModel'
+import{ Strategy as LocalStrategy} from 'passport-local'
+import{ Strategy as Jwtstrategy, ExtractJwt} from 'passport-jwt'
+import { UserModel, UserSchemaInterface } from '../models/UserModel'
 // import { generateMD5 } from '../utils/generateHash';
 
 passport.use(new LocalStrategy(
@@ -22,6 +23,27 @@ passport.use(new LocalStrategy(
         }
     }
   ));
+
+  passport.use(
+      new Jwtstrategy(
+          {
+              secretOrKey: process.env.SECRET_KEY || '123',
+              jwtFromRequest: ExtractJwt.fromHeader('token')
+          },
+          async (payload: {data: UserSchemaInterface}, done): Promise<void> => {
+              try {
+                  const user = await UserModel.findById(payload.data._id).exec()
+
+                  if(user){
+                    return done(null, user)
+                  }
+                  done(null, false)
+              } catch (error) {
+                    done(error, false)
+              }
+          }
+      )
+  )
 
   passport.serializeUser((user: any, done): void => {
       done(null, user?._id)
