@@ -86,6 +86,17 @@ export const useHomeStyle = makeStyles((theme) => ({
       backgroundColor: 'rgb(245, 249, 250)',
     },
   },
+  tweetContent: {
+    width: '100%'
+  },
+  tweetContentHeader: {
+    position: 'relative'
+  },
+  tweetContentHeaderButton: {
+    position: 'absolute',
+    top: -5,
+    right: -8
+  },
   tweetForm: {
     display: 'flex',
     padding: 15,
@@ -216,10 +227,6 @@ export const useHomeStyle = makeStyles((theme) => ({
   tweetFormFooterButton: {
     width: 100,
     height: 40,
-  },
-
-  tweetsUserName: {
-    color: grey[500],
   },
   tweetsFooter: {
     display: 'flex',

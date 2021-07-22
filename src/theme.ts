@@ -34,7 +34,7 @@ export const theme = createMuiTheme({
     },
     text: {
         primary: '#14171a',
-        secondary: 'rgb(83,100,113)'
+        secondary: 'rgb(83, 100, 113)',
     }
   },
   // @ts-ignore

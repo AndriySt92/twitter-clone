@@ -5,9 +5,10 @@ import {LoadingStatus} from '../Types'
 
 function* fetchTweetRequest({payload: tweetId} : FetchTweetActionType): any {
   try{
-    const tweet = yield call(tweetsApi.fetchTweetData, tweetId)
-    //tweet is array so we need get elem by 0 index
-    yield put(setTweet(tweet[0]))
+    const data = yield call(tweetsApi.fetchTweetData, tweetId)
+    if(data.status === 'success'){
+      yield put(setTweet(data.data))
+    }
   } catch(error) {
     yield put(setLoandingStatus(LoadingStatus.ERORR))
   }

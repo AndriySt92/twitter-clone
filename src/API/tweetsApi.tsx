@@ -1,15 +1,24 @@
-import axios from 'axios'
+import { axios } from '../core/axios'
 import { TweetState } from '../redux/tweet/Types'
 import { Tweet, TweetsState } from '../redux/tweets/Types'
 
+interface ResponseTweets<T> {
+  status: string;
+  data: T
+}
+
 export const tweetsApi = {
-  fetchTweets(): Promise<TweetsState['tweets']> {
-    return axios.get('/tweets').then((res) => res.data)
+  fetchTweets: async (): Promise<ResponseTweets<Tweet[]>> => {
+    const { data } = await axios.get('/tweets')
+    return data
   },
-  fetchTweetData(tweetId: string): Promise<TweetState['tweet']> {
-    return axios.get(`/tweets?_id=${tweetId}`).then((res) => res.data)
+  fetchTweetData: async (tweetId: string): Promise<ResponseTweets<Tweet>> => {
+    const { data } = await axios.get(`/tweet/${tweetId}`)
+    return data
   },
-  addTweet(tweet: Tweet): Promise<Tweet> {
-    return axios.post(`/tweets`,  tweet).then((res) => res.data)
+  addTweet: async (text: string): Promise<ResponseTweets<Tweet>> => {
+    
+    const { data } = await axios.post<ResponseTweets<Tweet>>(`/tweet`, {text})
+    return data
   },
 }

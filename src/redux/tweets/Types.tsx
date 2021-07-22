@@ -9,6 +9,7 @@ export interface Tweet {
     _id:string,
     user: User,
     text: string,
+    createdAt: string
 }
 
 

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import format from 'date-fns/format'
+import ruLand from 'date-fns/locale/ru'
 import { useHomeStyle } from '../pages/Home/theme'
 import { IconButton, Paper, Typography, Avatar } from '@material-ui/core'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
@@ -13,6 +15,7 @@ import { cleanTweetData, fetchTweet } from '../redux/tweet/actions'
 import { getLoadingStatusTweet, getTweet } from '../redux/tweet/selectors'
 import { Tweet } from './Tweet'
 import { TweetForm } from './TweetForm'
+
 
 export const TweetPage: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch()
@@ -30,7 +33,6 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
   }, [id])
 
   if (!tweet) {
-    console.log('null')
     return null
   }
 
@@ -46,17 +48,14 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
               <Avatar
                 className={classes.tweetAvatar}
                 alt="Travis Howard"
-                src={tweet.user.avatarUrl}
+                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
               />
               <div>
                 <Typography>
                   <b>{tweet.user.fullname}</b>
-                  <div>
-                    <span className={classes.tweetsUserName}> {tweet.user.username}</span>
-                    &nbsp;
-                    <span className={classes.tweetsUserName}>.</span>&nbsp;
-                    <span className={classes.tweetsUserName}>1 ч</span>
-                  </div>
+                  <Typography color='textSecondary'>
+                    <span> {tweet.user.username}</span>
+                    </Typography>
                 </Typography>
               </div>
             </div>
@@ -68,6 +67,10 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
             <div className={classes.tweetPageText}>
               <Typography variant="body1">{tweet.text}</Typography>
             </div>
+            <Typography color='textSecondary' style= {{margin: '13px 0px'}}>
+              <span>{format(new Date(tweet.createdAt), 'H:mm ', {locale: ruLand})} ‧ </span>
+              <span>{format(new Date(tweet.createdAt), 'dd MMM. yyyy г.', {locale: ruLand})}</span>
+            </Typography>
             <div className={classes.tweetPageMark}>
               <div>
                 <Typography component="span" variant="h6">

@@ -9,10 +9,6 @@ export interface TweetModelInterface {
 
 export type TweetDocumentInterface = TweetModelInterface & Document
 const TweetSchema = new Schema<TweetModelInterface>({
-    _id: {
-        unique: true,
-        type: String
-    },
     text: {
         required:true,
         maxLength:280,
@@ -23,6 +19,8 @@ const TweetSchema = new Schema<TweetModelInterface>({
         ref: "User",
         type: Schema.Types.ObjectId
     },
+},{
+    timestamps: true
 })
 
 

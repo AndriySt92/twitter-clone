@@ -28,6 +28,7 @@ app.get('/tweets', TweetCtrl.index)
 app.post('/tweet', passport.authenticate('jwt'), tweetCreateValidator, TweetCtrl.create)
 app.get('/tweet/:id', TweetCtrl.show)
 app.delete('/tweet/:id', passport.authenticate('jwt'), TweetCtrl.delete)
+app.patch('/tweet/:id', passport.authenticate('jwt'),tweetCreateValidator, TweetCtrl.update)
 // app.patch('/users', UserCtrl.update)
 // app.delete('/users', UserCtrl.delete)
 
