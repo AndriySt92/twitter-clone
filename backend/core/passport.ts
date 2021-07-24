@@ -7,6 +7,7 @@ import { UserModel, UserSchemaInterface } from '../models/UserModel'
 passport.use(new LocalStrategy(
     async (username: any, password: any, done: any): Promise<void> => {
         try {
+            
             const user = await UserModel.findOne({ $or: [{email: username}, {username}]}).exec()
             console.log(user,'yser')
             if(!user){

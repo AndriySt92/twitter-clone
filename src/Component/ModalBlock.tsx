@@ -8,15 +8,14 @@ import {
   DialogContent,
   DialogTitle,
 } from '@material-ui/core'
-import { useStylesSignIn } from '../pages/SignIn'
+import { useStylesSignIn } from '../pages/SignIn/theme'
 import CloseIcon from '@material-ui/icons/Close'
 
 export interface DialogProps {
   children: React.ReactNode
-  classes?: ReturnType<typeof useStylesSignIn>
   visible?: boolean
   onClose: () => void
-  withTitle?:boolean
+  withTitle?: boolean
   title?: string | null
 }
 export const ModalBlock: React.FC<DialogProps> = ({
@@ -31,8 +30,11 @@ export const ModalBlock: React.FC<DialogProps> = ({
     <Dialog open={visible} onClose={onClose} aria-labelledby="form-dialog-title">
       {withTitle && (
         <DialogTitle id="form-dialog-title">
-          <IconButton aria-label="close" onClick={onClose}>
-            <CloseIcon />
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            >
+            <CloseIcon style={{display: 'block', width: 32, height: 32, margin: '10px auto'}} />
           </IconButton>
           {title}
         </DialogTitle>
