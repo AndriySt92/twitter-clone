@@ -1,16 +1,16 @@
-import { AuthState } from './Types'
+import { AuthStateType } from './Types'
 import { LoadingStatus } from '../Types'
 import { AuthActions, AuthActionType } from './actions'
 
-const initialAuthState: AuthState = {
+const initialAuthState: AuthStateType = {
   userData: null,
   loadingStatus: LoadingStatus.NEVER,
 }
 
 export const authReducer = (
-  state: AuthState = initialAuthState,
+  state: AuthStateType = initialAuthState,
   action: AuthActions,
-): AuthState => {
+): AuthStateType => {
   switch (action.type) {
     case AuthActionType.FETCH_USER_DATA:
       return {
@@ -22,6 +22,11 @@ export const authReducer = (
         ...state,
         userData: action.payload,
         loadingStatus: LoadingStatus.LOADED,
+      }
+    case AuthActionType.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loadingStatus: action.payload
       }
     default:
       return state

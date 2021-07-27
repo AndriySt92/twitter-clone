@@ -1,7 +1,7 @@
 import { TweetState } from './Types'
 import { LoadingStatus } from '../Types'
-import { RootState } from '../store'
+import { RootStateType } from '../store'
 
-export const getTweet = (state: RootState): TweetState['tweet'] => state.tweet.tweet
-export const getLoadingStatusTweet = (state: RootState): boolean =>
+export const getTweet = (state: RootStateType): TweetState['tweet'] => state.tweet.tweet
+export const getLoadingStatusTweet = (state: RootStateType): boolean =>
   state.tweet.loadingStatus === LoadingStatus.LOADING

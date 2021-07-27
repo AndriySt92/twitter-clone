@@ -14,11 +14,9 @@ import { Tweet } from './Types'
 function* fetchTweetsRequest(): any {
   try {
     const tweets = yield call(tweetsApi.fetchTweets)
-    if(tweets.status === 'success'){
-      yield put(setTweets(tweets.data))
-    }
+    yield put(setTweets(tweets.data))
   } catch (error) {
-    yield put(setLoandingStatusFetchTweets(LoadingStatus.ERORR))
+    yield put(setLoandingStatusFetchTweets(LoadingStatus.ERROR))
   }
 }
 
@@ -26,11 +24,11 @@ function* addTweetRequest({ payload }: AddTweetType): any {
   try {
     yield put(setLoadingStatusAddTweet(LoadingStatus.LOADING))
     const tweet = yield call(tweetsApi.addTweet, payload)
-    if(tweet.status === 'success'){
+    if (tweet.status === 'success') {
       yield put(setAddTweet(tweet.data))
     }
   } catch (error) {
-    yield put(setLoadingStatusAddTweet(LoadingStatus.ERORR))
+    yield put(setLoadingStatusAddTweet(LoadingStatus.ERROR))
   }
 }
 

@@ -1,7 +1,7 @@
 import { TopicsState } from './Types'
 import { LoadingStatus } from '../Types'
-import { RootState } from '../store'
+import { RootStateType } from '../store'
 
-export const getTopics = (state: RootState): TopicsState['topics'] => state.topics.topics
-export const getLoadingStatusTopics = (state: RootState): boolean =>
-  state.topics.loadingStatus === LoadingStatus.LOADING
+export const getTopics = (state: RootStateType): TopicsState['topics'] => state.topics.topics
+export const getLoadingStatusTopics = (state: RootStateType): boolean =>
+  state.topics.loadingStatus === 'LOADING'

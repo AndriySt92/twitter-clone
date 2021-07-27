@@ -1,8 +1,6 @@
-
-import { string } from 'yup/lib/locale'
 import { LoadingStatus } from '../Types'
 
-export interface UserDataInterface {
+export interface UserDataType{
   confirmed: boolean
   _id: string
   email: string
@@ -10,12 +8,12 @@ export interface UserDataInterface {
   fullname: string
 }
 
-export interface SignInInterface {
+export interface SignInType {
   email: string;
   password: string
 }
 
-export interface AuthState {
-  userData: UserDataInterface | null
+export interface AuthStateType {
+  userData: UserDataType | null
   loadingStatus: LoadingStatus
 }

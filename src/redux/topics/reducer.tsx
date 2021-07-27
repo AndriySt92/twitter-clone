@@ -1,5 +1,6 @@
-import { TopicsState, LoadingStatus } from './Types'
-import { fetchTopics, TopicsActions, TopicsActionType } from './actions'
+import { TopicsState } from './Types'
+import { LoadingStatus } from '../Types'
+import { TopicsActions, TopicsActionType } from './actions'
 
 const initialTweetsState: TopicsState = {
   topics: [],

@@ -10,7 +10,7 @@ function* fetchTweetRequest({payload: tweetId} : FetchTweetActionType): any {
       yield put(setTweet(data.data))
     }
   } catch(error) {
-    yield put(setLoandingStatus(LoadingStatus.ERORR))
+    yield put(setLoandingStatus(LoadingStatus.ERROR))
   }
 }
 

@@ -1,10 +1,10 @@
 import { TweetsState } from './Types'
 import { LoadingStatus } from '../Types'
-import { RootState } from '../store'
+import { RootStateType } from '../store'
 
-export const getTweets = (state: RootState): TweetsState['tweets'] => state.tweets.tweets
-export const getLoadingStatusFetchTweets = (state: RootState): boolean =>
+export const getTweets = (state: RootStateType): TweetsState['tweets'] => state.tweets.tweets
+export const getLoadingStatusFetchTweets = (state: RootStateType): boolean =>
   state.tweets.loadingStatusFetchTweets === LoadingStatus.LOADING
 
-export const getLoadingStatusAddTweet = (state: RootState): string =>
+export const getLoadingStatusAddTweet = (state: RootStateType): string =>
   state.tweets.loadingStatusAddTweet
