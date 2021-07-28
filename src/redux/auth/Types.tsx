@@ -8,6 +8,14 @@ export interface UserDataType{
   fullname: string
 }
 
+export interface SignUpType {
+  fullname:  string;
+  username: string;
+  email: string;
+  password: string;
+  password2: string;
+}
+
 export interface SignInType {
   email: string;
   password: string

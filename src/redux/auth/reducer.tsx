@@ -12,7 +12,7 @@ export const authReducer = (
   action: AuthActions,
 ): AuthStateType => {
   switch (action.type) {
-    case AuthActionType.FETCH_USER_DATA:
+    case AuthActionType.FETCH_SIGNIN_DATA:
       return {
         ...state,
         loadingStatus: LoadingStatus.LOADING,

@@ -1,35 +1,21 @@
 import { axios } from '../core/axios'
-import { UserDataType } from '../redux/auth/Types'
-import { Tweet, TweetsState } from '../redux/tweets/Types'
+import { SignInType, SignUpType, UserDataType } from '../redux/auth/Types'
 
 interface ResponseApi<T> {
   status: string
   data: T
 }
 
-interface SignUpData {
-  fullname: string
-  username: string
-  email: string
-  password: string
-  password2: string
-}
-
-interface SignInData {
-  email: string
-  password: string
-}
-
 export const authApi = {
-  signUp: async (signUpdata: SignUpData): Promise<ResponseApi<UserDataType>> => {
-    const { data } = await axios.post('http://localhost:8888/auth/register', signUpdata)
+  signUp: async (signUpData: SignUpType): Promise<ResponseApi<UserDataType>> => {
+    const { data } = await axios.post('http://localhost:8888/auth/register', signUpData)
     return data
   },
   signUpVerify: async (confirmHash: string): Promise<ResponseApi<UserDataType>> => {
     const { data } = await axios.get(`http://localhost:8888/auth/verify?hash=${confirmHash}`)
     return data
   },
-  signIn: async (signInData: SignInData): Promise<ResponseApi<UserDataType>> => {
+  signIn: async (signInData: SignInType): Promise<ResponseApi<UserDataType>> => {
     const user = {
       username: signInData.email,
       password: signInData.password,

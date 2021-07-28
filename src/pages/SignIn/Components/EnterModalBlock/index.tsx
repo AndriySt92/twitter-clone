@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm, Controller } from 'react-hook-form'
 import { SignInType } from '../../../../redux/auth/Types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useStylesSignIn } from '../../theme'
-import { fetchUserData } from '../../../../redux/auth/actions'
+import { fetchSignInData } from '../../../../redux/auth/actions'
 import { Color } from '@material-ui/lab/Alert'
 import TextField from '@material-ui/core/TextField'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -37,6 +37,7 @@ export const EnterModalBlock: React.FC<EnterModalBlock> = ({
   classes,
 }): React.ReactElement => {
   const dispatch = useDispatch()
+  const [status, setStatus] = useState('NEVER')
   const openNotificationRef = useRef<(text: string, type: Color) => void>(() => {})
   const loadingStatusAuth = useSelector(getLoadingStatusAuth)
 
@@ -49,16 +50,17 @@ export const EnterModalBlock: React.FC<EnterModalBlock> = ({
   })
 
   useEffect(() => {
-    if (loadingStatusAuth === 'LOADED') {
+    setStatus(loadingStatusAuth)
+    if (status === 'LOADED') {
       openNotificationRef.current('Авторизация прошла успешно', 'success')
       onClose()
-    } else if (loadingStatusAuth === 'ERROR') {
+    } else if (status === 'ERROR') {
       openNotificationRef.current('Ошибка авторизации', 'error')
     }
   }, [loadingStatusAuth])
 
   const onSubmit = (data: SignInType) => {
-    dispatch(fetchUserData(data))
+    dispatch(fetchSignInData(data))
   }
 
   return (
@@ -111,7 +113,7 @@ export const EnterModalBlock: React.FC<EnterModalBlock> = ({
                 />
               </FormControl>
               <DialogActions>
-                <Button type="submit" color="primary" variant="contained" fullWidth>
+                <Button disabled={loadingStatusAuth === "LOADING"} type="submit" color="primary" variant="contained" fullWidth>
                   Войти
                 </Button>
               </DialogActions>

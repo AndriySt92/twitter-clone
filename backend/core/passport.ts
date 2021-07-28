@@ -14,7 +14,7 @@ passport.use(new LocalStrategy(
                 return done(null, false)
             }
             //TODO - If we use generateMD5(password + process.env.SECRET_KEY), we have always get if(false)
-            if(user.password === password){
+            if(user.confirmed && user.password === password){
                 done(null, user)
             } else {
                 done(null, false)
