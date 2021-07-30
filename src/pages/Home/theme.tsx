@@ -7,7 +7,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
   },
   wrapper: {
     height: '100vh',
@@ -93,15 +93,15 @@ export const useHomeStyle = makeStyles((theme) => ({
     },
   },
   tweetContent: {
-    width: '100%'
+    width: '100%',
   },
   tweetContentHeader: {
-    position: 'relative'
+    position: 'relative',
   },
   tweetContentHeaderButton: {
     position: 'absolute',
     top: -5,
-    right: -8
+    right: -8,
   },
   tweetForm: {
     display: 'flex',
@@ -296,6 +296,31 @@ export const useHomeStyle = makeStyles((theme) => ({
     '& a': {
       color: 'inherit',
       textDecoration: '0',
+    },
+  },
+
+  imagesList: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    '& img': {
+      width: 50,
+      height: 50,
+      borderRadius: 6,
+    },
+  },
+  imagesListItem: {},
+  imagesListItemRemove: {
+    position: 'relative',
+    bottom: 44,
+    right: 9,
+    padding: '0px !important',
+    backgroundColor: 'red !important',
+    '& svg': {
+      fontSize: 16,
+      '& path': {
+        fill: 'white',
+      },
     },
   },
 }))

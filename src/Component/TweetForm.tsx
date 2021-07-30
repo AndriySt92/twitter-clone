@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core'
 import PublicIcon from '@material-ui/icons/Public'
 import CloseIcon from '@material-ui/icons/Close'
-import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined'
 import GifIcon from '@material-ui/icons/Gif'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import BarChartIcon from '@material-ui/icons/BarChart'
@@ -20,15 +19,21 @@ import { useHomeStyle } from '../pages/Home/theme'
 import { addTweet } from '../redux/tweets/actions'
 import { getLoadingStatusAddTweet } from '../redux/tweets/selectors'
 import { LoadingStatus } from '../redux/Types'
+import { UploadImg } from '../Component/UploadImg'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
 }
 
+export interface ImagesFileType {
+  image: Blob
+  url: string
+}
 export const TweetForm: React.FC<TweetFormProps> = ({
   classes,
 }: TweetFormProps): React.ReactElement => {
   const [text, setText] = useState<string>('')
+  const [images, setImages] = useState<ImagesFileType[]>([])
   const [visibleSnackbar, setVisibleSnackbar] = useState<boolean>(false)
   const dispatch = useDispatch()
   const isLoadingAddTweet = useSelector(getLoadingStatusAddTweet)
@@ -52,6 +57,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
   }
 
   const handlerClickAddTweet = () => {
+    
     dispatch(addTweet(text))
     setText('')
   }
@@ -81,9 +87,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
 
         <div className={classes.tweetFormFooter}>
           <div>
-            <IconButton aria-label="delete" className={classes.tweetFormFooterIcon}>
-              <ImageOutlinedIcon />
-            </IconButton>
+            <UploadImg classes={classes} images={images} onChangeImages={setImages} />
             <IconButton aria-label="delete" className={classes.tweetFormFooterIcon}>
               <GifIcon />
             </IconButton>
