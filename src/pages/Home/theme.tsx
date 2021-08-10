@@ -302,18 +302,24 @@ export const useHomeStyle = makeStyles((theme) => ({
   imagesList: {
     display: 'flex',
     alignItems: 'center',
-    position: 'absolute',
+  },
+  imagesListItem: {
+    width: 50,
+    height: 50,
+    position: 'relative',
+    marginRight: 10,
+    marginTop: 10,
     '& img': {
-      width: 50,
-      height: 50,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
       borderRadius: 6,
     },
   },
-  imagesListItem: {},
   imagesListItemRemove: {
-    position: 'relative',
+    position: 'absolute',
     bottom: 44,
-    right: 9,
+    right: -7,
     padding: '0px !important',
     backgroundColor: 'red !important',
     '& svg': {

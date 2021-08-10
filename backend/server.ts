@@ -56,7 +56,7 @@ app.post('/tweet', passport.authenticate('jwt'), tweetCreateValidator, TweetCtrl
 app.get('/tweet/:id', TweetCtrl.show)
 app.delete('/tweet/:id', passport.authenticate('jwt'), TweetCtrl.delete)
 app.patch('/tweet/:id', passport.authenticate('jwt'),tweetCreateValidator, TweetCtrl.update)
-app.post('/upload', upload.single('image'), UploadFileCtrl.upload)
+app.post('/upload', upload.single('img'), UploadFileCtrl.upload)
 
 app.listen(process.env.PORT, (): void => {
     console.log("server runed!")

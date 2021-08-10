@@ -4,11 +4,11 @@ import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined'
 import ClearIcon from '@material-ui/icons/Clear'
 import { useHomeStyle } from '../pages/Home/theme'
 import { ImagesFileType } from './TweetForm'
-import { Callback } from 'yup/lib/types'
+import { ImageList } from './ImageList'
 
 interface UploadImgProps {
   classes: ReturnType<typeof useHomeStyle>
-  images: ImagesFileType[],
+  images: ImagesFileType[]
   onChangeImages: (callback: (prev: ImagesFileType[]) => ImagesFileType[]) => void
 }
 
@@ -33,8 +33,7 @@ export const UploadImg: React.FC<UploadImgProps> = ({ classes, images, onChangeI
     }
   }, [])
   const handleRemoveImages = (url: string) => {
-    // setImages(images.filter((image) => image.url !== url))
-    onChangeImages((prev) => prev.filter(image => image.url !== url ))
+    onChangeImages((prev) => prev.filter((image) => image.url !== url))
   }
 
   useEffect(() => {
@@ -47,26 +46,18 @@ export const UploadImg: React.FC<UploadImgProps> = ({ classes, images, onChangeI
       }
     }
   })
-
+  
   return (
     <>
+      <ImageList
+        classes={classes}
+        handleRemoveImages={handleRemoveImages}
+        images={images.map((img) => img.url)}
+      />
       <IconButton onClick={handlerClickImg} className={classes.tweetFormFooterIcon}>
         <ImageOutlinedIcon />
       </IconButton>
       <input ref={inputRef} type="file" hidden />
-      <div className={classes.imagesList}>
-        {images.map((image, index) => (
-          <div>
-            <img key={`${image.url}${index}`} src={image.url} />
-            <IconButton
-              className={classes.imagesListItemRemove}
-              color="primary"
-              onClick={() => handleRemoveImages(image.url)}>
-              <ClearIcon />
-            </IconButton>
-          </div>
-        ))}
-      </div>
     </>
   )
 }

@@ -11,6 +11,7 @@ import {
 import PublicIcon from '@material-ui/icons/Public'
 import CloseIcon from '@material-ui/icons/Close'
 import GifIcon from '@material-ui/icons/Gif'
+import CropOriginalIcon from '@material-ui/icons/CropOriginal'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import BarChartIcon from '@material-ui/icons/BarChart'
 import MoodIcon from '@material-ui/icons/Mood'
@@ -20,6 +21,8 @@ import { addTweet } from '../redux/tweets/actions'
 import { getLoadingStatusAddTweet } from '../redux/tweets/selectors'
 import { LoadingStatus } from '../redux/Types'
 import { UploadImg } from '../Component/UploadImg'
+import { setLoadingStatusAddTweet } from '../redux/tweets/actions'
+import { uploadImg } from '../utils/uploadImg'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -56,10 +59,19 @@ export const TweetForm: React.FC<TweetFormProps> = ({
     }
   }
 
-  const handlerClickAddTweet = () => {
-    
-    dispatch(addTweet(text))
+  const handlerClickAddTweet = async () => {
+    let urls = []
+    dispatch(setLoadingStatusAddTweet(LoadingStatus.LOADING))
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].image
+      const { url } = await uploadImg(file)
+      console.log(file, url)
+      urls.push(url)
+    }
+
+    dispatch(addTweet({ text, images: urls }))
     setText('')
+    setImages([])
   }
 
   return (
@@ -84,9 +96,9 @@ export const TweetForm: React.FC<TweetFormProps> = ({
             </div>
           </div>
         )}
-
+        
         <div className={classes.tweetFormFooter}>
-          <div>
+          <div className={classes.tweetFormFooter}>
             <UploadImg classes={classes} images={images} onChangeImages={setImages} />
             <IconButton aria-label="delete" className={classes.tweetFormFooterIcon}>
               <GifIcon />

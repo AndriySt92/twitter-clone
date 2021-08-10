@@ -13,8 +13,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { Preloader } from './Preloader'
 import { cleanTweetData, fetchTweet } from '../redux/tweet/actions'
 import { getLoadingStatusTweet, getTweet } from '../redux/tweet/selectors'
-import { Tweet } from './Tweet'
 import { TweetForm } from './TweetForm'
+import { ImageList } from './ImageList'
 
 
 export const TweetPage: React.FC = (): React.ReactElement | null => {
@@ -35,7 +35,7 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
   if (!tweet) {
     return null
   }
-
+  
   return (
     <div>
       {isLoadingTweet ? (
@@ -66,6 +66,7 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
           <div className={classes.tweetPageTweetBody}>
             <div className={classes.tweetPageText}>
               <Typography variant="body1">{tweet.text}</Typography>
+              {tweet.images && <ImageList classes={classes} images={tweet.images} />}
             </div>
             <Typography color='textSecondary' style= {{margin: '13px 0px'}}>
               <span>{format(new Date(tweet.createdAt), 'H:mm ', {locale: ruLand})} ‧ </span>

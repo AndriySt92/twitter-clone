@@ -56,7 +56,7 @@ class TweetController {
     async create(req: express.Request, res: express.Response): Promise<void> {
         try {
             const user = req.user as UserSchemaInterface;
-            console.log(user, 'user')
+
             if(user?._id) {
                 const errors = validationResult(req)
        
@@ -67,11 +67,11 @@ class TweetController {
 
                 const data: TweetModelInterface = {
                     text: req.body.text,
+                    images: req.body.images,
                     user: user._id,
                 }
-                console.log(data, 'text')
+                console.log(req.body, 'herrree')
                 const tweet = await TweetModel.create(data)
-                console.log(tweet, 'twett')
 
                 res.json({
                     status: 'success',

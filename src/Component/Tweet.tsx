@@ -8,12 +8,14 @@ import ReplyIcon from '@material-ui/icons/Reply'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { useHomeStyle } from '../pages/Home/theme'
 import { formatDate } from '../utils/formatDate'
+import { ImageList } from './ImageList'
 
 interface TweetProps {
   _id: string
   text: string
   classes: ReturnType<typeof useHomeStyle>
   createdAt: string
+  images?: string[]
   user: {
     fullname: string
     username: string
@@ -27,6 +29,7 @@ export const Tweet: React.FC<TweetProps> = ({
   user,
   _id,
   createdAt,
+  images,
 }: TweetProps): React.ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl)
@@ -78,7 +81,10 @@ export const Tweet: React.FC<TweetProps> = ({
             </div>
           </div>
 
-          <Typography variant="body1">{text}</Typography>
+          <Typography variant="body1">
+            {text}
+            </Typography>
+            {images && <ImageList classes={classes} images={images} />} 
           <div className={classes.tweetsFooter}>
             <div>
               <IconButton color="primary">
