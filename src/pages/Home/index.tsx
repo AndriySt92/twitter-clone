@@ -30,6 +30,7 @@ import { getLoadingStatusFetchTweets, getTweets } from '../../redux/tweets/selec
 import { fetchTopics } from '../../redux/topics/actions'
 import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
+import { UserSideProfile } from '../../Component/userSideProfile'
 
 export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
@@ -48,6 +49,7 @@ export const Home: React.FC = (): React.ReactElement => {
         <Grid item sm={1} md={2} >
           <MenuList classes={classes} />
         </Grid>
+        <UserSideProfile classes={classes} />
         <Grid item sm={8} md={6}>
           <Paper variant="outlined" className={classes.tweetsWrapper}>
             <Paper variant="outlined" className={classes.tweetsHeader}>

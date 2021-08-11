@@ -19,6 +19,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     maxWidth: 230,
+    marginLeft: -34,
   },
   menuLogoIcon: {
     fontSize: 36,
@@ -119,6 +120,11 @@ export const useHomeStyle = makeStyles((theme) => ({
       resize: 'none',
       padding: '5px 0px',
     },
+  },
+  tweetFormEdit: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   tweetFormPublic: {
     paddingTop: '10px',
@@ -329,4 +335,28 @@ export const useHomeStyle = makeStyles((theme) => ({
       },
     },
   },
+  userSideProfile: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'fixed',
+    bottom: 20,
+    left: 302,
+    width: 210,
+    padding: 8,
+    borderRadius: 31,
+    backgroundColor: 'white',
+    zIndex: 2,
+    '&:hover': {
+      backgroundColor: '#F5F8FA',
+    },
+  },
+  userSideProfileInfo: {
+    display: 'flex',
+  },
+  userSideDataPopupMenu: {
+    'bottom': '90px !important',
+    'top': 'auto !important',
+    'left': '315px !important',
+    'width': '210px !important'
+  }
 }))

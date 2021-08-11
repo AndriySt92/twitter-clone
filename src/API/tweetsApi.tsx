@@ -20,7 +20,8 @@ export const tweetsApi = {
     const { data } = await axios.post<ResponseTweets<Tweet>>(`/tweet`, payload)
     return data
   },
-  removeTweet: async (tweetId: string): Promise<void> => {
-    const { data } = await axios.delete(`/tweet/${tweetId}`)
-  }
+  removeTweet: (tweetId: string): Promise<void> => axios.delete(`/tweet/${tweetId}`),
+  updateTweet: (payload: {tweetId: string, text: string}): Promise<void> =>  axios.patch(`/tweet/${payload.tweetId}`, {text: payload.text} )
+   
+  
 }

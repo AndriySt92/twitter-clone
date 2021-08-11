@@ -11,7 +11,6 @@ import {
 import PublicIcon from '@material-ui/icons/Public'
 import CloseIcon from '@material-ui/icons/Close'
 import GifIcon from '@material-ui/icons/Gif'
-import CropOriginalIcon from '@material-ui/icons/CropOriginal'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import BarChartIcon from '@material-ui/icons/BarChart'
 import MoodIcon from '@material-ui/icons/Mood'

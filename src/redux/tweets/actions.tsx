@@ -5,7 +5,8 @@ import {TweetsState, Tweet} from './Types';
 export enum TweetsActionType {
     SET_TWEETS = 'tweets/SET_TWEETS',
     FETCH_TWEETS = 'tweets/FETCH_TWEETS',
-    REMOVE
+    UPDATE_TWEET = 'tweets/UPDATE_TWEET',
+    REMOVE_TWEET = 'tweets/REMOVE_TWEET',
     SET_LOADING_STATUS_FETCH_TWEETS = 'tweets/SET_LOADING_STATUS_FETCH_TWEETS',
     ADD_TWEET = 'tweets/ADD_TWEET',
     SET_ADDED_TWEET = 'tweets/SET_ADDED_TWEET',
@@ -18,7 +19,8 @@ export const fetchTweets = (): FetchTweetsActionType => ({type: TweetsActionType
 export const addTweet = (payload: { text:string, images: string[]}): AddTweetType => ({type: TweetsActionType.ADD_TWEET, payload})
 export const setAddTweet = (payload: Tweet): FetchAddTweetType => ({type: TweetsActionType.SET_ADDED_TWEET, payload})
 export const setLoadingStatusAddTweet = (payload: LoadingStatus) => ({type: TweetsActionType.SET_LOADING_STATUS_ADD_TWEET, payload })
-
+export const removeTweet = (payload: string) => ({type: TweetsActionType.REMOVE_TWEET, payload})
+export const updateTweet = (payload: {tweetId: string, text: string}) => ({type: TweetsActionType.UPDATE_TWEET, payload})
 
 export interface FetchTweetsActionType extends Action<TweetsActionType> {
     type: TweetsActionType.FETCH_TWEETS,
@@ -56,4 +58,17 @@ export interface SetLoadingStatusAddTweet extends Action<TweetsActionType> {
     payload: LoadingStatus
 }
 
-export type TweetsActions = SetTweetsActionType | SetLoandingStatusFetchTweets | FetchTweetsActionType | AddTweetType | FetchAddTweetType | SetLoadingStatusAddTweet
+export interface RemoveTweetType extends Action<TweetsActionType> {
+    type: TweetsActionType.REMOVE_TWEET
+    payload: string
+}
+
+export interface UpdateTweetType extends Action<TweetsActionType> {
+    type: TweetsActionType.UPDATE_TWEET
+    payload: {
+        tweetId: string,
+        text: string
+    }
+}
+
+export type TweetsActions = UpdateTweetType | RemoveTweetType | SetTweetsActionType | SetLoandingStatusFetchTweets | FetchTweetsActionType | AddTweetType | FetchAddTweetType | SetLoadingStatusAddTweet

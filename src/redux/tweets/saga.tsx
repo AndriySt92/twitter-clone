@@ -6,6 +6,8 @@ import {
   TweetsActionType,
   setAddTweet,
   setLoadingStatusAddTweet,
+  RemoveTweetType,
+  UpdateTweetType,
 } from './actions'
 import { tweetsApi } from '../../API/tweetsApi'
 import { LoadingStatus } from '../Types'
@@ -32,7 +34,27 @@ function* addTweetRequest({ payload }: AddTweetType): any {
   }
 }
 
+function* removeTweetRequest({ payload }: RemoveTweetType): any {
+  try {
+    yield call(tweetsApi.removeTweet, payload)
+    yield call(fetchTweetsRequest)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function* updateTweetRequest({ payload }: UpdateTweetType): any {
+  try {
+    yield call(tweetsApi.updateTweet, payload)
+    yield call(fetchTweetsRequest)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export function* tweetsSaga() {
   yield takeEvery(TweetsActionType.FETCH_TWEETS, fetchTweetsRequest)
   yield takeEvery(TweetsActionType.ADD_TWEET, addTweetRequest)
+  yield takeEvery(TweetsActionType.REMOVE_TWEET, removeTweetRequest)
+  yield takeEvery(TweetsActionType.UPDATE_TWEET, updateTweetRequest)
 }
