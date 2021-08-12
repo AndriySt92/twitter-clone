@@ -31,6 +31,7 @@ import { fetchTopics } from '../../redux/topics/actions'
 import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
 import { UserSideProfile } from '../../Component/userSideProfile'
+import { UserProfile } from '../../Component/UserProfile'
 
 export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
@@ -56,11 +57,20 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/home/:any">
                 <BackButton />
               </Route>
+              <Route path="/profile">
+                <BackButton />
+              </Route>
               <Route path="/home" exact>
                 <Typography variant="h6">Главная</Typography>
               </Route>
               <Route path="/home/tweet/:id">
                 <Typography variant="h6">Твит</Typography>
+              </Route>
+              <Route path="/profile" exact>
+                <div>
+                  <Typography variant="h6">Профиль</Typography>
+                  <Typography variant="body2">60 твитов</Typography>
+                </div>
               </Route>
               <Route path="/home/search">
                 <SearchTextField
@@ -92,6 +102,9 @@ export const Home: React.FC = (): React.ReactElement => {
               ) : (
                 tweets.map((tweet) => <Tweet key={tweet._id} classes={classes} {...tweet} />)
               )}
+            </Route>
+            <Route path="/profile" exact>
+              <UserProfile classes={classes}/>
             </Route>
           </Paper>
         </Grid>

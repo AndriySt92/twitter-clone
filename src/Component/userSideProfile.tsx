@@ -1,15 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Typography, Avatar, Menu, MenuItem, IconButton } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { useHomeStyle } from '../pages/Home/theme'
 import { getUserData } from '../redux/auth/selectors'
+import { logout } from '../redux/auth/actions'
+import { Link } from 'react-router-dom'
 
 interface UserSideProfilePropsType {
   classes: ReturnType<typeof useHomeStyle>
 }
 
 export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes }) => {
+  const dispatch = useDispatch()
   const userData = useSelector(getUserData)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
@@ -18,6 +21,12 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
   }
 
   const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    dispatch(logout())
     setAnchorEl(null)
   }
 
@@ -50,10 +59,12 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
           open={Boolean(anchorEl)}
           onClose={handleClose}
           classes={{
-              paper: classes.userSideDataPopupMenu
+            paper: classes.userSideDataPopupMenu,
           }}>
-          <MenuItem onClick={handleClose}>Профиль</MenuItem>
-          <MenuItem onClick={handleClose}>Выйти</MenuItem>
+          <Link to="/profile" style={{ color: '#14171a', textDecoration: 'none' }}>
+            <MenuItem onClick={handleClose}>Профиль</MenuItem>
+          </Link>
+          <MenuItem onClick={handleLogout}>Выйти</MenuItem>
         </Menu>
       </div>
     </div>

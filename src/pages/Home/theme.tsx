@@ -354,9 +354,33 @@ export const useHomeStyle = makeStyles((theme) => ({
     display: 'flex',
   },
   userSideDataPopupMenu: {
-    'bottom': '90px !important',
-    'top': 'auto !important',
-    'left': '315px !important',
-    'width': '210px !important'
+    bottom: '90px !important',
+    top: 'auto !important',
+    left: '315px !important',
+    width: '210px !important',
+  },
+  profile: {
+  },
+  profileHeader: {
+    height: 200,
+    backgroundColor: 'rgb(207, 217, 222)',
+  },
+  profileInfo: {
+    position: 'relative',
+    top: -78,
+    padding: '0px 10px',
+  },
+  profileInfoHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
+  },
+  profileAvatar:{
+    height:133,
+    width:133,
+    border: '5px solid white'
+  },
+  profileButton:{
+    marginBottom: 10
   }
 }))

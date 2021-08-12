@@ -24,7 +24,6 @@ export const authApi = {
       `http://localhost:8888/auth/login`,
       user,
     )
-    debugger
     return data
   },
   getMe: async (): Promise<ResponseApi<UserDataType>> => {

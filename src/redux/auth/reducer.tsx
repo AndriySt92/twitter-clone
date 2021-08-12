@@ -28,6 +28,12 @@ export const authReducer = (
         ...state,
         loadingStatus: action.payload
       }
+      case AuthActionType.LOGOUT:
+        return {
+          ...state,
+          userData: null,
+          loadingStatus: LoadingStatus.NEVER
+        }
     default:
       return state
   }
