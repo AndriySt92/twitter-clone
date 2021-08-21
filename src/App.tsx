@@ -8,6 +8,7 @@ import { getLoadingStatusAuth, getUserData } from './redux/auth/selectors'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import { useHomeStyle } from './pages/Home/theme'
 import { LoadingStatus } from './redux/Types'
+import { UserProfile } from './Component/UserProfile'
 
 function App() {
   const classes = useHomeStyle()
@@ -19,7 +20,7 @@ function App() {
   useEffect(() => {
     dispatch(initializeUser())
   }, [])
- 
+
   useEffect(() => {
     if (loadingStatusAuth === LoadingStatus.LOADED && userData) {
       history.push('/home')
@@ -40,7 +41,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/signin" component={SignIn} />
-        <Route path="/" component={Home} />
+        <Route path="/" component={Home} />   
       </Switch>
     </div>
   )

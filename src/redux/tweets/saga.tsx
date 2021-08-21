@@ -8,15 +8,25 @@ import {
   setLoadingStatusAddTweet,
   RemoveTweetType,
   UpdateTweetType,
+  FetchUserTweetsType,
+  setUserTweets,
 } from './actions'
 import { tweetsApi } from '../../API/tweetsApi'
 import { LoadingStatus } from '../Types'
-import { Tweet } from './Types'
 
 function* fetchTweetsRequest(): any {
   try {
     const tweets = yield call(tweetsApi.fetchTweets)
     yield put(setTweets(tweets.data))
+  } catch (error) {
+    yield put(setLoandingStatusFetchTweets(LoadingStatus.ERROR))
+  }
+}
+
+function* fetchUserTweetsRequest({ payload }: FetchUserTweetsType): any {
+  try {
+    const tweets = yield call(tweetsApi.fetchTweets, payload)
+    yield put(setUserTweets(tweets.data))
   } catch (error) {
     yield put(setLoandingStatusFetchTweets(LoadingStatus.ERROR))
   }
@@ -54,6 +64,7 @@ function* updateTweetRequest({ payload }: UpdateTweetType): any {
 
 export function* tweetsSaga() {
   yield takeEvery(TweetsActionType.FETCH_TWEETS, fetchTweetsRequest)
+  yield takeEvery(TweetsActionType.FETCH_USER_TWEETS, fetchUserTweetsRequest)
   yield takeEvery(TweetsActionType.ADD_TWEET, addTweetRequest)
   yield takeEvery(TweetsActionType.REMOVE_TWEET, removeTweetRequest)
   yield takeEvery(TweetsActionType.UPDATE_TWEET, updateTweetRequest)

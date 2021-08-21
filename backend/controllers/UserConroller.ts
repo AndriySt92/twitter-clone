@@ -35,7 +35,7 @@ class UserController {
                return
            }
 
-            const user = await UserModel.findById(userId).exec()
+            const user = await UserModel.findById(userId).populate('tweets').exec()
            
             if(!user){
                 res.status(404).send()
@@ -64,13 +64,15 @@ class UserController {
                 return
             }
 
+            const randomStr = Math.random().toString()
+
             const data: UserSchemaInterface = {
                 email: req.body.email,
                 username: req.body.username,
                 fullname: req.body.fullname,
                 password: req.body.password,
                 //TODO - Passport doesn't work with this password: generateMD5(req.body.password + process.env.SECRET_KEY)
-                confirmHash: generateMD5(process.env.SECRET_KEY || Math.random().toString()) 
+                confirmHash: generateMD5(process.env.SECRET_KEY + randomStr || randomStr) 
             }
 
             const user = await UserModel.create(data)
@@ -112,7 +114,7 @@ class UserController {
             }
            //@ts-ignore
             let user = await UserModel.findOne({confirmHash: hash}).exec()
-            console.log(user)
+            
             if(user){
                 user.confirmed = true
                 user.save()

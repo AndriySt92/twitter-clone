@@ -53,6 +53,36 @@ class TweetController {
             })
         }
     }
+
+    async getUserTweets(req: express.Request, res: express.Response): Promise<void> {
+        try{
+            const userId = req.params.id
+
+           if(!isValidObjectId(userId)){
+               res.status(400).send()
+               return
+           }
+
+            const tweet = await TweetModel.find({ user: userId }).populate('user').exec()
+           
+            if(!tweet){
+                res.status(404).send()
+                return 
+            }
+   
+            res.json({
+                status: 'success',
+                data: tweet
+            })
+
+            
+        } catch(error){
+            res.status(500).json({
+                status: 'error',
+                message: error
+            })
+        }
+    }
     async create(req: express.Request, res: express.Response): Promise<void> {
         try {
             const user = req.user as UserSchemaInterface;
@@ -70,9 +100,10 @@ class TweetController {
                     images: req.body.images,
                     user: user._id,
                 }
-                console.log(req.body, 'herrree')
+               
                 const tweet = await TweetModel.create(data)
 
+                // user.tweets = [...user.tweets, tweet]
                 res.json({
                     status: 'success',
                     data: await tweet.populate('user').execPopulate()
@@ -130,13 +161,13 @@ class TweetController {
         try {
             if(user){
                 const tweetId = req.params.id
-                console.log(user, "User update")
+
                 if(!isValidObjectId(tweetId)){
                     res.status(400).send()
                     return
                 }
                 const tweet = await TweetModel.findById(tweetId)
-                console.log(tweet, "Tweet update")
+    
                 if(tweet){
                     //@ts-ignore
                     if(String(tweet.user._id) === String(user._id)){

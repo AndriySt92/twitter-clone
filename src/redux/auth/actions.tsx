@@ -8,7 +8,7 @@ export enum AuthActionType {
   SET_USER_DATA = 'auth/SET_USER_DATA',
   SET_LOADING_STATUS = 'auth/SET_LOADING_STATUS',
   INITIALIZE_USER = 'auth/INITIALIZE_USER',
-  LOGOUT = 'auth/LOGOUT'
+  LOGOUT = 'auth/LOGOUT',
 }
 
 export const setLoandingStatus = (payload: LoadingStatus): SetLodingStatus => ({
@@ -27,16 +27,16 @@ export const fetchSignInData = (payload: SignInType): FetchSignInDataActionType 
 })
 
 export const initializeUser = (): InitializeUserType => ({
-  type: AuthActionType.INITIALIZE_USER
+  type: AuthActionType.INITIALIZE_USER,
 })
 
 export const fetchSignUpData = (payload: SignUpType): FetchSignUpDataActionType => ({
   type: AuthActionType.FETCH_SIGNUP_DATA,
-  payload
+  payload,
 })
 
 export const logout = (): LogoutType => ({
-  type: AuthActionType.LOGOUT
+  type: AuthActionType.LOGOUT,
 })
 
 export interface FetchSignInDataActionType extends Action<AuthActionType> {
@@ -67,4 +67,10 @@ export interface LogoutType extends Action<AuthActionType> {
   type: AuthActionType.LOGOUT
 }
 
-export type AuthActions = LogoutType | SetUserDataActionType | SetLodingStatus | FetchSignInDataActionType | InitializeUserType | FetchSignUpDataActionType
+export type AuthActions =
+  | LogoutType
+  | SetUserDataActionType
+  | SetLodingStatus
+  | FetchSignInDataActionType
+  | InitializeUserType
+  | FetchSignUpDataActionType

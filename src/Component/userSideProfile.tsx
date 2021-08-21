@@ -61,7 +61,9 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
           classes={{
             paper: classes.userSideDataPopupMenu,
           }}>
-          <Link to="/profile" style={{ color: '#14171a', textDecoration: 'none' }}>
+          <Link
+            to={`/profile/${userData._id}`}
+            style={{ color: '#14171a', textDecoration: 'none' }}>
             <MenuItem onClick={handleClose}>Профиль</MenuItem>
           </Link>
           <MenuItem onClick={handleLogout}>Выйти</MenuItem>

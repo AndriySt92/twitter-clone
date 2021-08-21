@@ -57,7 +57,7 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/home/:any">
                 <BackButton />
               </Route>
-              <Route path="/profile">
+              <Route path="/profile/:any" exact>
                 <BackButton />
               </Route>
               <Route path="/home" exact>
@@ -66,7 +66,7 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/home/tweet/:id">
                 <Typography variant="h6">Твит</Typography>
               </Route>
-              <Route path="/profile" exact>
+              <Route path="/profile/:any" >
                 <div>
                   <Typography variant="h6">Профиль</Typography>
                   <Typography variant="body2">60 твитов</Typography>
@@ -103,9 +103,7 @@ export const Home: React.FC = (): React.ReactElement => {
                 tweets.map((tweet) => <Tweet key={tweet._id} classes={classes} {...tweet} />)
               )}
             </Route>
-            <Route path="/profile" exact>
-              <UserProfile classes={classes}/>
-            </Route>
+            <Route path="/profile/:id" component={UserProfile} />
           </Paper>
         </Grid>
         <Grid item sm={3} md={4}>

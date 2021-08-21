@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import {
   IconButton,
   Menu,
@@ -30,7 +30,7 @@ interface TweetProps {
   user: {
     fullname: string
     username: string
-    avatarUrl: string
+    _id?: string
   }
 }
 
@@ -41,14 +41,17 @@ export const Tweet: React.FC<TweetProps> = ({
   _id,
   createdAt,
   images,
-}: TweetProps): React.ReactElement => {
+}: TweetProps) => {
   const dispatch = useDispatch()
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [tweetText, setTweetText] = useState<string>(text)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const history = useHistory()
-
+  if (!user) {
+    return null
+  }
+  console.log(user, 'userid')
   const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault()
     history.push(`/home/tweet/${_id}`)
@@ -89,14 +92,19 @@ export const Tweet: React.FC<TweetProps> = ({
     }
   }
 
+  const handleClickName = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    e.stopPropagation()
+    history.push(`/profile/${user._id}`)
+  }
+
   return (
     <a onClick={handleClickTweet} className={classes.tweetWrapper}>
       <Paper variant="outlined" className={classes.tweetBody}>
-        <Avatar className={classes.tweetAvatar} alt="Travis Howard" src={user.avatarUrl} />
+        <Avatar className={classes.tweetAvatar} alt="Travis Howard" />
         <div className={classes.tweetContent}>
           <div className={classes.tweetContentHeader}>
             <Typography>
-              <b>{user.fullname}</b>
+              <b onClick={handleClickName} className={classes.tweetUserFullname}>{user.fullname}</b>
               <Typography color="textSecondary">
                 <span> {user.username}</span>
                 &nbsp;

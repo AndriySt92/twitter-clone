@@ -15,7 +15,8 @@ export interface Tweet {
 
 
 export interface TweetsState {
-    tweets: Tweet[],
+    tweets: Tweet[]
+    userTweets: Tweet[]
     loadingStatusFetchTweets: LoadingStatus
     loadingStatusAddTweet: LoadingStatus
 }

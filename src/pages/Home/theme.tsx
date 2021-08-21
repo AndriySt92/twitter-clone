@@ -42,6 +42,11 @@ export const useHomeStyle = makeStyles((theme) => ({
       },
     },
   },
+  menuListLink: {
+    textDecoration: 'none',
+    color: 'black',
+    display: 'inline-flex',
+  },
   menuListButton: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(2),
@@ -108,6 +113,11 @@ export const useHomeStyle = makeStyles((theme) => ({
     display: 'flex',
     padding: 15,
     borderRadius: 3,
+  },
+  tweetUserFullname: {
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   tweetFormTextarea: {
     width: '100%',
@@ -359,8 +369,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     left: '315px !important',
     width: '210px !important',
   },
-  profile: {
-  },
+  profile: {},
   profileHeader: {
     height: 200,
     backgroundColor: 'rgb(207, 217, 222)',
@@ -369,18 +378,27 @@ export const useHomeStyle = makeStyles((theme) => ({
     position: 'relative',
     top: -78,
     padding: '0px 10px',
+    '& .MuiTabs-root': {
+      margin: '0px -10px',
+      '& .MuiTab-root': {
+        minWidth: 148,
+      },
+    },
+    "& .MuiBox-root": {
+      padding: 0
+    }
   },
   profileInfoHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
-  profileAvatar:{
-    height:133,
-    width:133,
-    border: '5px solid white'
+  profileAvatar: {
+    height: 133,
+    width: 133,
+    border: '5px solid white',
   },
-  profileButton:{
-    marginBottom: 10
-  }
+  profileButton: {
+    marginBottom: 10,
+  },
 }))

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { IconButton, Typography, Button, Hidden, Dialog, DialogContent } from '@material-ui/core'
 import { useHomeStyle } from '../pages/Home/theme'
 import TwitterIcon from '@material-ui/icons/Twitter'
@@ -17,6 +18,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import CloseIcon from '@material-ui/icons/Close'
 import { TweetForm } from './TweetForm'
 import ModalBlock from './ModalBlock'
+import { getUserData } from '../redux/auth/selectors'
 
 interface MenuListProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -26,6 +28,7 @@ export const MenuList: React.FC<MenuListProps> = ({
   classes,
 }: MenuListProps): React.ReactElement => {
   const [openModal, setOpenModal] = React.useState<boolean>(false)
+  const userData = useSelector(getUserData)
 
   const handleClickOpen = () => {
     setOpenModal(true)
@@ -38,7 +41,7 @@ export const MenuList: React.FC<MenuListProps> = ({
     <div>
       <ul className={classes.menuList}>
         <li>
-          <Link to="/home">
+          <Link to="/home" className={classes.menuListLink}>
             <IconButton>
               <TwitterIcon className={classes.menuLogoIcon} color="primary" />
             </IconButton>
@@ -46,82 +49,98 @@ export const MenuList: React.FC<MenuListProps> = ({
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <HomeIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Главная
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <HomeIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Главная
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <SearchIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Поиск
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <SearchIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Поиск
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <NotificationsNoneIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Уведомления
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <NotificationsNoneIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Уведомления
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <MailOutlineIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Сообщения
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <MailOutlineIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Сообщения
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <BookmarkBorderIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Закладки
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <BookmarkBorderIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Закладки
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <ListAltIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Списки
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <ListAltIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Списки
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <PersonIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Профиль
-              </Typography>
-            </Hidden>
+            <Link to={`/profile/${userData?._id}`} className={classes.menuListLink}>
+              <PersonIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Профиль
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li className={classes.menulistItem}>
           <div>
-            <MoreHorizIcon className={classes.menulistItemIcon} />
-            <Hidden smDown>
-              <Typography variant="h6" className={classes.menulistItemLabel}>
-                Еще
-              </Typography>
-            </Hidden>
+            <Link to="/home" className={classes.menuListLink}>
+              <MoreHorizIcon className={classes.menulistItemIcon} />
+              <Hidden smDown>
+                <Typography variant="h6" className={classes.menulistItemLabel}>
+                  Еще
+                </Typography>
+              </Hidden>
+            </Link>
           </div>
         </li>
         <li>
