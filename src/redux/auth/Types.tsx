@@ -1,3 +1,4 @@
+import { string } from 'yup'
 import { LoadingStatus } from '../Types'
 
 export interface UserDataType {
@@ -7,6 +8,17 @@ export interface UserDataType {
   username: string
   fullname: string
   createdAt: string
+  about: string
+}
+
+export interface UpdateUserInfoType {
+  id: string
+  avatarUrl?: string
+  fullname?: string
+  location?: string
+  about?: string
+  birthday?: string
+  website?: string
 }
 
 export interface SignUpType {

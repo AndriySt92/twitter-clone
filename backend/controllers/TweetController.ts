@@ -157,11 +157,11 @@ class TweetController {
     async update(req: express.Request, res: express.Response): Promise<void>{
 
         const user = req.user as UserSchemaInterface
-       
+       console.log(user)
         try {
             if(user){
                 const tweetId = req.params.id
-
+                console.log(req.body)
                 if(!isValidObjectId(tweetId)){
                     res.status(400).send()
                     return

@@ -11,14 +11,15 @@ export interface UserSchemaInterface {
     location?:string;
     about?:string;
     website?:string;
+    birthday?: string;
     // tweets:TweetModelInterface[]
 }
 
 export type UserSchemaDocumentInterface = UserSchemaInterface & Document
 const UserSchema = new Schema<UserSchemaInterface>({
     email: {
-        unique: true,
-        required:true,
+        // unique: true,
+        // required:true,
         type: String
     },
     fullname: {

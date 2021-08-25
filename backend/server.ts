@@ -46,6 +46,7 @@ const allowedOrigins = [
 app.get('/users', UserCtrl.index)
 app.get('/user/me',cors(corsOptions) , passport.authenticate('jwt', {session: false}), UserCtrl.getUserInfo)
 app.get('/user/:id',cors(corsOptions), registerValidator, UserCtrl.show)
+app.patch('/user/:id',cors(corsOptions), passport.authenticate('jwt'), UserCtrl.update)
 
 app.post('/auth/register',cors(corsOptions) , registerValidator, UserCtrl.create)
 app.get('/auth/verify', registerValidator, UserCtrl.verify)

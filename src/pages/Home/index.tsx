@@ -26,7 +26,7 @@ import { SearchTextField } from '../../Component/SearchTextForm'
 import { TweetForm } from '../../Component/TweetForm'
 import { TweetPage } from '../../Component/TweetPage'
 import { fetchTweets } from '../../redux/tweets/actions'
-import { getLoadingStatusFetchTweets, getTweets } from '../../redux/tweets/selectors'
+import { getLoadingStatusFetchTweets, getTweets, getUserTweets } from '../../redux/tweets/selectors'
 import { fetchTopics } from '../../redux/topics/actions'
 import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
@@ -37,6 +37,7 @@ export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
   const dispatch = useDispatch()
   const tweets = useSelector(getTweets)
+  const userTweets = useSelector(getUserTweets)
   const isLoadingTweets = useSelector(getLoadingStatusFetchTweets)
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/profile/:any" >
                 <div>
                   <Typography variant="h6">Профиль</Typography>
-                  <Typography variant="body2">60 твитов</Typography>
+                  <Typography variant="body2">{userTweets.length} твитов</Typography>
                 </div>
               </Route>
               <Route path="/home/search">

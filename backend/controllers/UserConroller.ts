@@ -170,6 +170,35 @@ class UserController {
         }
     }
 
+    async update(req: express.Request, res: express.Response): Promise<void>{
+
+        const userId = req.params.id
+        const user = await UserModel.findById(userId).exec()
+        try {
+            if(user){
+                if(req.body.fullname) user.fullname = req.body.fullname
+                if(req.body.about) user.about = req.body.about
+                if(req.body.location) user.location = req.body.location
+                if(req.body.birthday) user.birthday = req.body.birthday
+                if(req.body.website) user.website = req.body.website 
+                console.log(req.body)
+                user.save()
+                res.json({
+                    status: 'success',
+                    data: user
+                })
+            
+            } else {
+                res.status(403).send()
+            }
+        } catch (error) {
+            res.status(500).json({
+                status: 'error',
+                message: error
+            })
+        }
+    }
+
 }
 
 export const UserCtrl = new UserController();
