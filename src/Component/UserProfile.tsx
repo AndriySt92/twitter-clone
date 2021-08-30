@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 import {
@@ -12,6 +12,7 @@ import {
   DialogTitle,
   FormControl,
   TextField,
+  IconButton,
 } from '@material-ui/core'
 import ModalBlock from './ModalBlock'
 import { useForm } from 'react-hook-form'
@@ -24,13 +25,21 @@ import { fetchUserTweets } from '../redux/tweets/actions'
 import { getUserTweets } from '../redux/tweets/selectors'
 import { Tweet } from './Tweet'
 import { updateUserInfo } from '../redux/auth/actions'
-import { getLoadingStatusAuth, getUserData } from '../redux/auth/selectors'
-import { LoadingStatus } from '../redux/Types'
+import { getUserData } from '../redux/auth/selectors'
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
+import { UploadImg } from './UploadImg'
+import { UploadImgAvatar } from './UploadImgAvatar'
+import { uploadImg } from '../utils/uploadImg'
 
 interface TabPanelProps {
   children?: React.ReactNode
   index: any
   value: any
+}
+
+export interface ImagesFileType {
+  image: Blob
+  url: string
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -64,6 +73,7 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
   const dispatch = useDispatch()
   const [value, setValue] = useState(0)
   const [visibleModal, setVisibleModal] = useState(false)
+  const [avatarFile, setAvatarFile] = useState<ImagesFileType | null>(null)
   const {
     register,
     handleSubmit,
@@ -103,10 +113,14 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
     setVisibleModal(true)
   }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const file = avatarFile?.image
+    const { url } = await uploadImg(file)
+    data.avatar = url
     data.id = userData._id
     dispatch(updateUserInfo(data))
     setVisibleModal(false)
+    console.log(data)
   }
 
   return (
@@ -114,7 +128,7 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
       <div className={classes.profileHeader}></div>
       <div className={classes.profileInfo}>
         <div className={classes.profileInfoHeader}>
-          <Avatar className={classes.profileAvatar} />
+          <Avatar className={classes.profileAvatar} src={userData.avatar}/>
           <Button
             variant="outlined"
             className={classes.profileButton}
@@ -125,6 +139,15 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
             {/* <TwitterIcon color="primary" className={classes.dialogIcon} /> */}
             <DialogTitle id="form-dialog-title">Изменить профиль</DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div className={classes.uploadAvatarBlock}>
+                {avatarFile && <Avatar className={classes.profileAvatar} src={avatarFile.url} />}
+                {!avatarFile && <Avatar className={classes.profileAvatar} />}
+                <UploadImgAvatar
+                  classes={classes}
+                  onChangeImages={setAvatarFile}
+                  image={avatarFile}
+                />
+              </div>
               <FormControl style={{ width: '100%' }}>
                 <TextField
                   {...register('fullname')}
@@ -133,7 +156,7 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
                   variant="outlined"
                   label="Имя"
                   fullWidth
-                  style={{ marginBottom: 30 }}
+                  style={{ marginBottom: 30, marginTop: 20 }}
                 />
 
                 <TextField

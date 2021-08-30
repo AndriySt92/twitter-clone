@@ -12,6 +12,7 @@ export interface UserSchemaInterface {
     about?:string;
     website?:string;
     birthday?: string;
+    avatar?: string;
     // tweets:TweetModelInterface[]
 }
 
@@ -46,6 +47,7 @@ const UserSchema = new Schema<UserSchemaInterface>({
     },
     about: String,
     website: String,
+    avatar: String,
     tweets: [{type: Schema.Types.ObjectId, ref: 'Tweet'}]
 },{
     timestamps: true

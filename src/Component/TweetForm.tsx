@@ -22,6 +22,7 @@ import { LoadingStatus } from '../redux/Types'
 import { UploadImg } from '../Component/UploadImg'
 import { setLoadingStatusAddTweet } from '../redux/tweets/actions'
 import { uploadImg } from '../utils/uploadImg'
+import { getUserData } from '../redux/auth/selectors'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -39,6 +40,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
   const [visibleSnackbar, setVisibleSnackbar] = useState<boolean>(false)
   const dispatch = useDispatch()
   const isLoadingAddTweet = useSelector(getLoadingStatusAddTweet)
+  const userData = useSelector(getUserData)
   const textPercent = Math.round((text.length / 280) * 100)
   const maxLength = 280 - text.length
 
@@ -78,7 +80,7 @@ export const TweetForm: React.FC<TweetFormProps> = ({
       <Avatar
         className={classes.tweetAvatar}
         alt="Travis Howard"
-        src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+        src={userData?.avatar}
       />
       <div className={classes.tweetFormTextarea}>
         <TextareaAutosize

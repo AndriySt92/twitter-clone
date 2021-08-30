@@ -9,6 +9,7 @@ export interface UserDataType {
   fullname: string
   createdAt: string
   about: string
+  avatar: string
 }
 
 export interface UpdateUserInfoType {

@@ -40,7 +40,7 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
         <Avatar
           className={classes.tweetAvatar}
           alt="Travis Howard"
-          src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+          src={userData?.avatar}
         />
         <Typography>
           <b>{userData.fullname}</b>

@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import IconButton from '@material-ui/core/IconButton'
-import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined'
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
+import CloseIcon from '@material-ui/icons/Close';
 import { useHomeStyle } from '../pages/Home/theme'
 import { ImagesFileType } from './TweetForm'
 import { ImageList } from './ImageList'
 
 interface UploadImgProps {
   classes: ReturnType<typeof useHomeStyle>
-  images: ImagesFileType[]
-  onChangeImages: (callback: (prev: ImagesFileType[]) => ImagesFileType[]) => void
+  image: ImagesFileType | null
+  onChangeImages: (img: ImagesFileType | null ) => void
 }
 
-export const UploadImg: React.FC<UploadImgProps> = ({ classes, images, onChangeImages }) => {
+export const UploadImgAvatar: React.FC<UploadImgProps> = ({ classes, onChangeImages, image }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handlerClickImg = () => {
@@ -27,12 +28,13 @@ export const UploadImg: React.FC<UploadImgProps> = ({ classes, images, onChangeI
 
       if (file) {
         const imageUrl = URL.createObjectURL(new Blob([file]))
-        onChangeImages((prev) => [...prev, { image: file, url: imageUrl }])
+        onChangeImages({ image: file, url: imageUrl })
+        console.log()
       }
     }
   }, [])
-  const handleRemoveImages = (url: string) => {
-    onChangeImages((prev) => prev.filter((image) => image.url !== url))
+  const handleRemoveImages = () => {
+    onChangeImages(null)
   }
 
   useEffect(() => {
@@ -48,15 +50,15 @@ export const UploadImg: React.FC<UploadImgProps> = ({ classes, images, onChangeI
 
   return (
     <>
-      <ImageList
-        classes={classes}
-        handleRemoveImages={handleRemoveImages}
-        images={images.map((img) => img.url)}
-      />
-      <IconButton onClick={handlerClickImg} className={classes.tweetFormFooterIcon}>
-        <ImageOutlinedIcon />
+      <div className={classes.imagesUploadButton}>
+      <IconButton  onClick={handlerClickImg}>
+        <PhotoCameraIcon />
       </IconButton>
+      {image && <IconButton onClick={handleRemoveImages}>
+        <CloseIcon />
+      </IconButton>}
       <input ref={inputRef} type="file" hidden />
+      </div>
     </>
   )
 }

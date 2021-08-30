@@ -181,6 +181,7 @@ class UserController {
                 if(req.body.location) user.location = req.body.location
                 if(req.body.birthday) user.birthday = req.body.birthday
                 if(req.body.website) user.website = req.body.website 
+                if(req.body.avatar) user.avatar = req.body.avatar
                 console.log(req.body)
                 user.save()
                 res.json({

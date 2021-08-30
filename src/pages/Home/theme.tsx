@@ -1,6 +1,7 @@
 import { theme } from '../../theme'
 import { makeStyles } from '@material-ui/core'
 import grey from '@material-ui/core/colors/grey'
+import { relative } from 'path'
 
 export const useHomeStyle = makeStyles((theme) => ({
   centered: {
@@ -345,6 +346,12 @@ export const useHomeStyle = makeStyles((theme) => ({
       },
     },
   },
+  imagesUploadButton: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   userSideProfile: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -401,4 +408,11 @@ export const useHomeStyle = makeStyles((theme) => ({
   profileButton: {
     marginBottom: 10,
   },
+  uploadAvatarBlock: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    width: 'fit-content'
+  }
 }))

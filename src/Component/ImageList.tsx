@@ -16,15 +16,9 @@ export const ImageList: React.FC<ImageListPropsType> = ({
   handleRemoveImages,
 }) => {
 
-    
-  React.useEffect(() => {
-    mediumZoom('img')
-  }, [images])
-
   if (!images) {
     return null
   }
-
 
   return (
     <div className={classes.imagesList}>

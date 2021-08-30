@@ -30,7 +30,8 @@ interface TweetProps {
   user: {
     fullname: string
     username: string
-    _id?: string
+    _id?: string,
+    avatar?: string
   }
 }
 
@@ -51,7 +52,7 @@ export const Tweet: React.FC<TweetProps> = ({
   if (!user) {
     return null
   }
-  console.log(user, 'userid')
+
   const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault()
     history.push(`/home/tweet/${_id}`)
@@ -100,7 +101,7 @@ export const Tweet: React.FC<TweetProps> = ({
   return (
     <a onClick={handleClickTweet} className={classes.tweetWrapper}>
       <Paper variant="outlined" className={classes.tweetBody}>
-        <Avatar className={classes.tweetAvatar} alt="Travis Howard" />
+        <Avatar className={classes.tweetAvatar} src={user?.avatar} />
         <div className={classes.tweetContent}>
           <div className={classes.tweetContentHeader}>
             <Typography>
