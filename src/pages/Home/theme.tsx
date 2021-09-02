@@ -315,7 +315,31 @@ export const useHomeStyle = makeStyles((theme) => ({
       textDecoration: '0',
     },
   },
-
+  readUserItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  readUserItemInfo: {
+    display: 'flex',
+  },
+  readUserItemName: {
+    '& b': {
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  },
+  readUserItemButton: {
+    backgroundColor: '#000',
+    color: '#fff',
+    fontSize: 14,
+    height: 32,
+    padding: '0px 15px',
+    '&:hover': {
+      backgroundColor: '#292929'
+    }
+  },
   imagesList: {
     display: 'flex',
     alignItems: 'center',
@@ -350,7 +374,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   userSideProfile: {
     display: 'flex',
@@ -391,9 +415,9 @@ export const useHomeStyle = makeStyles((theme) => ({
         minWidth: 148,
       },
     },
-    "& .MuiBox-root": {
-      padding: 0
-    }
+    '& .MuiBox-root': {
+      padding: 0,
+    },
   },
   profileInfoHeader: {
     display: 'flex',
@@ -413,6 +437,6 @@ export const useHomeStyle = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    width: 'fit-content'
-  }
+    width: 'fit-content',
+  },
 }))

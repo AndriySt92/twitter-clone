@@ -1,4 +1,3 @@
-import { string } from 'yup'
 import { LoadingStatus } from '../Types'
 
 export interface UserDataType {

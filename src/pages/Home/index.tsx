@@ -19,7 +19,6 @@ import {
   IconButton,
 } from '@material-ui/core'
 import { MenuList } from '../../Component/MenuList'
-import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import SearchIcon from '@material-ui/icons/Search'
 import { useHomeStyle } from './theme'
 import { SearchTextField } from '../../Component/SearchTextForm'
@@ -32,6 +31,8 @@ import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
 import { UserSideProfile } from '../../Component/userSideProfile'
 import { UserProfile } from '../../Component/UserProfile'
+import { fetchUsers } from '../../redux/users/actions'
+import { ReadUser } from '../../Component/ReadUser'
 
 export const Home: React.FC = (): React.ReactElement => {
   const classes = useHomeStyle()
@@ -42,6 +43,7 @@ export const Home: React.FC = (): React.ReactElement => {
 
   useEffect(() => {
     dispatch(fetchTweets())
+    dispatch(fetchUsers())
     dispatch(fetchTopics())
   }, [])
 
@@ -122,35 +124,7 @@ export const Home: React.FC = (): React.ReactElement => {
               fullWidth
             />
             <Topics classes={classes} />
-            <Paper className={classes.rightSideBlock} elevation={0}>
-              <Paper variant="outlined" className={classes.rightSideBlockHeader}>
-                <b>Кого читать</b>
-              </Paper>
-              <List>
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemAvatar>
-                    <Avatar src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1047&q=80" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Актуальные темы: Украина"
-                    secondary={
-                      <>
-                        <Typography component="span" variant="body1">
-                          Твитов: 154 132
-                        </Typography>
-                        <Typography component="div" variant="body1">
-                          Твитов: 154 132
-                        </Typography>
-                      </>
-                    }
-                  />
-                  <Button color="primary">
-                    <PersonAddIcon />
-                  </Button>
-                </ListItem>
-                <Divider component="li" />
-              </List>
-            </Paper>
+            <ReadUser classes={classes} />
           </div>
         </Grid>
       </Grid>

@@ -4,10 +4,10 @@ import { topicsApi } from '../../API/topicApi'
 import { LoadingStatus } from '../Types'
 
 function* fetchTopics(): any {
-  try{
+  try {
     const data = yield call(topicsApi.fetchTopics)
-    yield put(setTopics(data))
-  } catch(error) {
+    yield put(setTopics(data.data))
+  } catch (error) {
     yield put(setLoandingStatus(LoadingStatus.ERROR))
   }
 }

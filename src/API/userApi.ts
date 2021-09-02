@@ -14,5 +14,9 @@ interface ResponseApi<T> {
       updateUserInfo: async (payload: UpdateUserInfoType): Promise<ResponseApi<UserDataType>> => {
         const { data } = await axios.patch(`http://localhost:8888/user/${payload.id}`, payload)
         return data
+      },
+      getAllUsers: async (): Promise<ResponseApi<UserDataType>> => {
+        const {data} = await axios.get('/users')
+        return data
       }
   }

@@ -1,13 +1,13 @@
 import { LoadingStatus } from "../Types";
-export interface Topics {
+export interface TopicType {
     _id:string,
-    title: string,
+    topic: string,
     tag: string,
-    count: string,
+    tweetCount: string,
 
 }
 
 export interface TopicsState {
-    topics: Topics[],
+    topics: TopicType[],
     loadingStatus: LoadingStatus
 }

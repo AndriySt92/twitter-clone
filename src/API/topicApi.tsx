@@ -1,8 +1,14 @@
 import axios from 'axios'
-import { TopicsState } from '../redux/topics/Types'
+import { TopicType } from '../redux/topics/Types'
+
+interface ResponseApi<T> {
+  status: string
+  data: T
+}
 
 export const topicsApi = {
-  fetchTopics(): Promise<TopicsState['topics']> {
-    return axios.get('/topics').then((res) => res.data)
+  fetchTopics: async (): Promise<ResponseApi<TopicType[]>> => {
+    const { data } = await axios.get('/topic')
+    return data
   },
 }

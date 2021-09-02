@@ -11,6 +11,7 @@ import { registerValidator } from './validations/register';
 import { passport } from './core/passport'
 import { tweetCreateValidator } from './validations/tweetCreate';
 import { UploadFileCtrl } from './controllers/UploadFileController';
+import { TopicCtrl } from './controllers/TopicControler';
 
 
 dotenv.config()
@@ -58,7 +59,11 @@ app.get('/tweet/:id', TweetCtrl.show)
 app.get('/tweets/user/:id', TweetCtrl.getUserTweets)
 app.delete('/tweet/:id', passport.authenticate('jwt'), TweetCtrl.delete)
 app.patch('/tweet/:id', passport.authenticate('jwt'),tweetCreateValidator, TweetCtrl.update)
+
 app.post('/upload', upload.single('img'), UploadFileCtrl.upload)
+
+app.get('/topic', TopicCtrl.index )
+app.post('/topic', TopicCtrl.create )
 
 app.listen(process.env.PORT, (): void => {
     console.log("server runed!")
