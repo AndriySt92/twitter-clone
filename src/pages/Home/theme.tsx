@@ -357,7 +357,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     height: 50,
     position: 'relative',
     marginRight: 10,
-    marginTop: 10,
+    marginTop: 20,
     '& img': {
       width: '100%',
       height: '100%',

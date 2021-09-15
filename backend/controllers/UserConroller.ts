@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken'
 class UserController {
     async index(_: any, res: express.Response): Promise<void> {
         try{
-            const users = await UserModel.find({}).exec()
+            const users = await (await UserModel.find({}).sort({createdAt: -1}).limit(5).exec())
 
             res.json({
                 status: 'success',

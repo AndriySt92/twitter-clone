@@ -6,6 +6,8 @@ export interface TweetModelInterface {
     text: string;
     images?: string[]
     user: UserSchemaInterface | string
+    userLikedId: string[]
+    likeCount: number
 }
 
 export type TweetDocumentInterface = TweetModelInterface & Document
@@ -21,6 +23,12 @@ const TweetSchema = new Schema<TweetModelInterface>({
         type: Schema.Types.ObjectId
     },
     images: {
+        type: Array
+    },
+    likeCount: {
+        type: Number
+    },
+    userLikedId: {
         type: Array
     }
 },{

@@ -22,4 +22,6 @@ export const tweetsApi = {
   removeTweet: (tweetId: string): Promise<void> => axios.delete(`/tweet/${tweetId}`),
   updateTweet: (payload: { tweetId: string; text: string }): Promise<void> =>
     axios.patch(`/tweet/${payload.tweetId}`, { text: payload.text }),
+  tweetLike: (payload: { tweetId: string; userId: string }): Promise<void> =>
+    axios.get(`/like?userId=${payload.userId}&tweetId=${payload.tweetId}`),
 }

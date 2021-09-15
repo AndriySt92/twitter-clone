@@ -8,7 +8,7 @@ import { UserSchemaInterface } from '../models/UserModel'
 class TweetController {
     async index(_: any, res: express.Response): Promise<void> {
         try{
-            const tweets = await TweetModel.find({}).populate('user').sort({createAt: -1}).exec()
+            const tweets = await TweetModel.find({}).populate('user').sort({createdAt: -1}).exec()
 
             res.json({
                 status: 'success',
@@ -99,6 +99,8 @@ class TweetController {
                     text: req.body.text,
                     images: req.body.images,
                     user: user._id,
+                    likeCount: 0,
+                    userLikedId: []
                 }
                
                 const tweet = await TweetModel.create(data)
@@ -157,7 +159,7 @@ class TweetController {
     async update(req: express.Request, res: express.Response): Promise<void>{
 
         const user = req.user as UserSchemaInterface
-       console.log(user)
+
         try {
             if(user){
                 const tweetId = req.params.id
@@ -186,6 +188,39 @@ class TweetController {
 
                 res.send()
             }
+        } catch (error) {
+            res.status(500).json({
+                status: 'error',
+                message: error
+            })
+        }
+    }
+    async likeTweet(req: express.Request, res: express.Response): Promise<void>{
+
+        const {tweetId, userId} = req.query
+        console.log(tweetId, 'tweet')
+        console.log(userId)
+        try {
+            
+                const tweet = await TweetModel.findById(tweetId)
+    
+                if(tweet){
+//@ts-ignore
+                    if(!tweet.userLikedId.includes(userId)){
+                        //@ts-ignore
+                        tweet.userLikedId = [...tweet.userLikedId, userId]
+                        tweet.likeCount++
+                    } else {
+                        tweet.userLikedId = tweet.userLikedId.filter(id => id !== userId)
+                        tweet.likeCount--
+                    }
+                    tweet.save()
+                    res.send()
+                    
+                } else {
+                    res.status(400).send()
+                }
+              res.send()
         } catch (error) {
             res.status(500).json({
                 status: 'error',

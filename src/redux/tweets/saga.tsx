@@ -10,6 +10,7 @@ import {
   UpdateTweetType,
   FetchUserTweetsType,
   setUserTweets,
+  SetTweetLikeType,
 } from './actions'
 import { tweetsApi } from '../../API/tweetsApi'
 import { LoadingStatus } from '../Types'
@@ -62,10 +63,20 @@ function* updateTweetRequest({ payload }: UpdateTweetType): any {
   }
 }
 
+function* likeTweetRequest({ payload }: SetTweetLikeType): any {
+  try {
+    yield call(tweetsApi.tweetLike, payload)
+    yield call(fetchTweetsRequest)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export function* tweetsSaga() {
   yield takeEvery(TweetsActionType.FETCH_TWEETS, fetchTweetsRequest)
   yield takeEvery(TweetsActionType.FETCH_USER_TWEETS, fetchUserTweetsRequest)
   yield takeEvery(TweetsActionType.ADD_TWEET, addTweetRequest)
   yield takeEvery(TweetsActionType.REMOVE_TWEET, removeTweetRequest)
   yield takeEvery(TweetsActionType.UPDATE_TWEET, updateTweetRequest)
+  yield takeEvery(TweetsActionType.SET_TWEET_LIKE, likeTweetRequest)
 }

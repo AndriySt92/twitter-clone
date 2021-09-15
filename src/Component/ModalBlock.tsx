@@ -18,11 +18,11 @@ export const ModalBlock: React.FC<DialogProps> = ({
 }: DialogProps): React.ReactElement | null => {
   if (!visible) return null
   return (
-    <Dialog open={visible} onClose={onClose} aria-labelledby="form-dialog-title">
+    <Dialog open={visible} aria-labelledby="form-dialog-title">
       {withTitle && (
         <DialogTitle id="form-dialog-title">
-          <IconButton aria-label="close" onClick={onClose}>
-            <CloseIcon style={{ display: 'block', width: 32, height: 32}} />
+          <IconButton aria-label="close" onClick={onClose} style={{ marginRight: 10 }}>
+            <CloseIcon style={{ display: 'block', width: 32, height: 32 }} />
           </IconButton>
           {title}
         </DialogTitle>

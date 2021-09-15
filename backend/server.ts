@@ -59,6 +59,7 @@ app.get('/tweet/:id', TweetCtrl.show)
 app.get('/tweets/user/:id', TweetCtrl.getUserTweets)
 app.delete('/tweet/:id', passport.authenticate('jwt'), TweetCtrl.delete)
 app.patch('/tweet/:id', passport.authenticate('jwt'),tweetCreateValidator, TweetCtrl.update)
+app.get('/like', passport.authenticate('jwt'), TweetCtrl.likeTweet)
 
 app.post('/upload', upload.single('img'), UploadFileCtrl.upload)
 

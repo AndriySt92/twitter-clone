@@ -80,7 +80,9 @@ export const Home: React.FC = (): React.ReactElement => {
               </Paper>
               <div className={classes.tweetFormBottomLine}></div>
             </Route>
-            <Route path="/home/tweet/:id">{/* <TweetPage /> */}</Route>
+            <Route path="/home/tweet/:id">
+              <TweetPage />
+            </Route>
             <Route path="/home" exact>
               {isLoadingTweets ? (
                 <Preloader />

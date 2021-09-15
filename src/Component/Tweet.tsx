@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
   IconButton,
@@ -19,7 +19,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { useHomeStyle } from '../pages/Home/theme'
 import { formatDate } from '../utils/formatDate'
 import { ImageList } from './ImageList'
-import { removeTweet, updateTweet } from '../redux/tweets/actions'
+import { removeTweet, setTweetLike, updateTweet } from '../redux/tweets/actions'
+import { getUserData } from '../redux/auth/selectors'
 
 interface TweetProps {
   _id: string
@@ -27,6 +28,7 @@ interface TweetProps {
   classes: ReturnType<typeof useHomeStyle>
   createdAt: string
   images?: string[]
+  likeCount: string
   user: {
     fullname: string
     username: string
@@ -40,6 +42,7 @@ export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
   _id,
+  likeCount,
   createdAt,
   images,
 }: TweetProps) => {
@@ -47,6 +50,7 @@ export const Tweet: React.FC<TweetProps> = ({
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [tweetText, setTweetText] = useState<string>(text)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const authUser = useSelector(getUserData)
   const open = Boolean(anchorEl)
   const history = useHistory()
   if (!user) {
@@ -98,6 +102,17 @@ export const Tweet: React.FC<TweetProps> = ({
     history.push(`/profile/${user._id}`)
   }
 
+  const onTweetLike = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (authUser?._id) {
+      const payload = {
+        userId: authUser?._id,
+        tweetId: _id,
+      }
+      dispatch(setTweetLike(payload))
+    }
+  }
+
   return (
     <a onClick={handleClickTweet} className={classes.tweetWrapper}>
       <Paper variant="outlined" className={classes.tweetBody}>
@@ -108,7 +123,7 @@ export const Tweet: React.FC<TweetProps> = ({
               <b onClick={handleClickName} className={classes.tweetUserFullname}>
                 {user.fullname}
               </b>
-              <div style={{display: 'flex'}}>
+              <div style={{ display: 'flex' }}>
                 <Typography color="textSecondary"> {user.username}</Typography>
                 &nbsp;
                 <span> ‧ </span>&nbsp;
@@ -130,6 +145,7 @@ export const Tweet: React.FC<TweetProps> = ({
 
           {!isEdit ? (
             <Typography variant="body1" style={{ wordWrap: 'break-word' }}>
+              {' '}
               {text}
             </Typography>
           ) : (
@@ -160,7 +176,6 @@ export const Tweet: React.FC<TweetProps> = ({
               <IconButton color="primary">
                 <ChatBubbleOutlineIcon style={{ fontSize: 20 }} />
               </IconButton>
-              <span>1</span>
             </div>
             <div>
               <IconButton color="primary">
@@ -168,10 +183,10 @@ export const Tweet: React.FC<TweetProps> = ({
               </IconButton>
             </div>
             <div>
-              <IconButton color="primary">
+              <IconButton color="primary" onClick={(e) => onTweetLike(e)}>
                 <FavoriteBorderIcon style={{ fontSize: 20 }} />
               </IconButton>
-              <span>1</span>
+              <b>{likeCount}</b>
             </div>
             <div>
               <IconButton color="primary">

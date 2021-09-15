@@ -128,7 +128,6 @@ export const TweetForm: React.FC<TweetFormProps> = ({
                     variant="static"
                     value={textPercent >= 100 ? 100 : textPercent}
                     thickness={4}
-                    // color="primary"
                     size={20}
                     style={text.length > 280 ? { color: 'red' } : {}}
                   />
@@ -136,7 +135,6 @@ export const TweetForm: React.FC<TweetFormProps> = ({
                     variant="static"
                     value={100}
                     thickness={4}
-                    // color="primary"
                     size={20}
                     style={{ color: 'rgba(0,0,0,0.1)' }}
                   />

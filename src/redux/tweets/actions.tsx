@@ -13,6 +13,7 @@ export enum TweetsActionType {
   ADD_TWEET = 'tweets/ADD_TWEET',
   SET_ADDED_TWEET = 'tweets/SET_ADDED_TWEET',
   SET_LOADING_STATUS_ADD_TWEET = 'tweets/SET_LOADING_STATUS_ADD_TWEET',
+  SET_TWEET_LIKE = 'tweets/SET_TWEET_LIKE',
 }
 
 export const setLoandingStatusFetchTweets = (
@@ -51,6 +52,12 @@ export const fetchUserTweets = (payload: string): FetchUserTweetsType => ({
   type: TweetsActionType.FETCH_USER_TWEETS,
   payload,
 })
+
+export const setTweetLike = (payload: { userId: string, tweetId: string}): SetTweetLikeType => ({
+  type: TweetsActionType.SET_TWEET_LIKE,
+  payload,
+})
+
 export interface FetchTweetsActionType extends Action<TweetsActionType> {
   type: TweetsActionType.FETCH_TWEETS
 }
@@ -110,7 +117,16 @@ export interface FetchUserTweetsType extends Action<TweetsActionType> {
   payload: string
 }
 
+export interface SetTweetLikeType extends Action<TweetsActionType> {
+  type: TweetsActionType.SET_TWEET_LIKE
+  payload: {
+    userId: string
+    tweetId: string
+  }
+}
+
 export type TweetsActions =
+  | SetTweetLikeType
   | SetUserTweetsActionType
   | FetchUserTweetsType
   | UpdateTweetType

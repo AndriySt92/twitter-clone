@@ -7,6 +7,7 @@ export interface Tweet {
   text: string
   createdAt: string
   images: string[]
+  likeCount: string
 }
 
 export interface TweetsState {

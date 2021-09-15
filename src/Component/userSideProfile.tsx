@@ -45,7 +45,7 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
           </Typography>
         </div>
       </div>
-      <div>
+      <div style={{ margin: '0px 10px' }}>
         <IconButton onClick={handleClick}>
           <MoreHorizIcon />
         </IconButton>

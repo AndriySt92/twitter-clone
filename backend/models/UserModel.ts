@@ -13,6 +13,7 @@ export interface UserSchemaInterface {
     website?:string;
     birthday?: string;
     avatar?: string;
+    createdAt?:string
     // tweets:TweetModelInterface[]
 }
 

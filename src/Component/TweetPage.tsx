@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
@@ -11,14 +11,17 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import ReplyIcon from '@material-ui/icons/Reply'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { Preloader } from './Preloader'
-import { cleanTweetData, fetchTweet } from '../redux/tweet/actions'
+import { cleanTweetData, fetchTweet, setTweet } from '../redux/tweet/actions'
 import { getLoadingStatusTweet, getTweet } from '../redux/tweet/selectors'
 import { TweetForm } from './TweetForm'
 import { ImageList } from './ImageList'
+import { getUserData } from '../redux/auth/selectors'
+import { setTweetLike } from '../redux/tweets/actions'
 
 export const TweetPage: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch()
   const tweet = useSelector(getTweet)
+  const authUser = useSelector(getUserData)
   const isLoadingTweet = useSelector(getLoadingStatusTweet)
   const classes = useHomeStyle()
   const params: { id?: string } = useParams()
@@ -34,7 +37,17 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
   if (!tweet) {
     return null
   }
-  console.log(tweet.user.avatar)
+
+  const onTweetLike = () => {
+    if (authUser) {
+      const payload = {
+        userId: authUser._id,
+        tweetId: tweet._id,
+      }
+      dispatch(setTweetLike(payload))
+    }
+  }
+
   return (
     <div>
       {isLoadingTweet ? (
@@ -94,7 +107,7 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
                 </div>
                 <div>
                   <Typography component="span" variant="h6">
-                    65.4 тыс.
+                    {tweet.likeCount}
                   </Typography>
                   <Typography component="span" variant="body1">
                     {' '}
@@ -114,7 +127,7 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
                   </IconButton>
                 </div>
                 <div>
-                  <IconButton>
+                  <IconButton onClick={onTweetLike}>
                     <FavoriteBorderIcon />
                   </IconButton>
                 </div>

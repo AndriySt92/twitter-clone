@@ -132,8 +132,11 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
             onClick={handleClickCustomizeProfile}>
             Настороить профиль
           </Button>
-          <ModalBlock visible={visibleModal} onClose={handleCloseModal}>
-            <DialogTitle id="form-dialog-title">Изменить профиль</DialogTitle>
+          <ModalBlock
+            visible={visibleModal}
+            onClose={handleCloseModal}
+            withTitle
+            title="Изменить профиль">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={classes.uploadAvatarBlock}>
                 {avatarFile && <Avatar className={classes.profileAvatar} src={avatarFile.url} />}
