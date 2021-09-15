@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {
   IconButton,
   Menu,
@@ -30,7 +30,7 @@ interface TweetProps {
   user: {
     fullname: string
     username: string
-    _id?: string,
+    _id?: string
     avatar?: string
   }
 }
@@ -104,15 +104,19 @@ export const Tweet: React.FC<TweetProps> = ({
         <Avatar className={classes.tweetAvatar} src={user?.avatar} />
         <div className={classes.tweetContent}>
           <div className={classes.tweetContentHeader}>
-            <Typography>
-              <b onClick={handleClickName} className={classes.tweetUserFullname}>{user.fullname}</b>
-              <Typography color="textSecondary">
-                <span> {user.username}</span>
+            <div>
+              <b onClick={handleClickName} className={classes.tweetUserFullname}>
+                {user.fullname}
+              </b>
+              <div style={{display: 'flex'}}>
+                <Typography color="textSecondary"> {user.username}</Typography>
                 &nbsp;
                 <span> ‧ </span>&nbsp;
-                <span>{formatDate(new Date(createdAt))} назад</span>
-              </Typography>
-            </Typography>
+                <Typography color="textSecondary">
+                  {formatDate(new Date(createdAt))} назад
+                </Typography>
+              </div>
+            </div>
             <div className={classes.tweetContentHeaderButton}>
               <IconButton color="primary" style={{ padding: '5px' }} onClick={handleClick}>
                 <MoreHorizIcon />
@@ -125,7 +129,9 @@ export const Tweet: React.FC<TweetProps> = ({
           </div>
 
           {!isEdit ? (
-            <Typography variant="body1">{text}</Typography>
+            <Typography variant="body1" style={{ wordWrap: 'break-word' }}>
+              {text}
+            </Typography>
           ) : (
             <div className={classes.tweetFormEdit}>
               <div className={classes.tweetFormTextarea}>

@@ -12,11 +12,6 @@ export const authReducer = (
   action: AuthActions,
 ): AuthStateType => {
   switch (action.type) {
-    case AuthActionType.FETCH_SIGNIN_DATA:
-      return {
-        ...state,
-        loadingStatus: LoadingStatus.LOADING,
-      }
     case AuthActionType.SET_USER_DATA:
       return {
         ...state,

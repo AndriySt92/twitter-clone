@@ -23,6 +23,7 @@ import { UploadImg } from '../Component/UploadImg'
 import { setLoadingStatusAddTweet } from '../redux/tweets/actions'
 import { uploadImg } from '../utils/uploadImg'
 import { getUserData } from '../redux/auth/selectors'
+import { ImageList } from './ImageList'
 
 interface TweetFormProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -75,13 +76,13 @@ export const TweetForm: React.FC<TweetFormProps> = ({
     setImages([])
   }
 
+  const handleRemoveImages = (url: string) => {
+    setImages((prev) => prev.filter((image) => image.url !== url))
+  }
+
   return (
     <div className={classes.tweetForm}>
-      <Avatar
-        className={classes.tweetAvatar}
-        alt="Travis Howard"
-        src={userData?.avatar}
-      />
+      <Avatar className={classes.tweetAvatar} alt="Travis Howard" src={userData?.avatar} />
       <div className={classes.tweetFormTextarea}>
         <TextareaAutosize
           value={text}
@@ -97,7 +98,11 @@ export const TweetForm: React.FC<TweetFormProps> = ({
             </div>
           </div>
         )}
-        
+        <ImageList
+          classes={classes}
+          handleRemoveImages={handleRemoveImages}
+          images={images.map((img) => img.url)}
+        />
         <div className={classes.tweetFormFooter}>
           <div className={classes.tweetFormFooter}>
             <UploadImg classes={classes} images={images} onChangeImages={setImages} />

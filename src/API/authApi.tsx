@@ -29,5 +29,5 @@ export const authApi = {
   getMe: async (): Promise<ResponseApi<UserDataType>> => {
     const { data } = await axios.get(`http://localhost:8888/user/me`)
     return data
-  }
+  },
 }

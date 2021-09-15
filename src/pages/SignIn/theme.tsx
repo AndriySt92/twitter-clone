@@ -19,8 +19,8 @@ export const useStylesSignIn = makeStyles((theme) => ({
     top: '53%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '350%',
-    height: '350%',
+    width: '350% !important',
+    height: '350% !important',
   },
   blueSideListInfo: {
     position: 'relative',
@@ -50,7 +50,7 @@ export const useStylesSignIn = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   loginSideTwitterIcon: {
-    fontSize: 45,
+    fontSize: '45px !important',
   },
   loginSideWrapper: {
     display: 'flex',
@@ -64,13 +64,31 @@ export const useStylesSignIn = makeStyles((theme) => ({
     marginTop: 20,
   },
   dialogIcon: {
-    display: 'block',
-    width: 32,
-    height: 32,
+    display: 'block !important',
+    width: '32px !important',
+    height: '32px !important',
     margin: '10px auto',
   },
   dialogTitleBirthday: {
     fontWeight: 600,
     margin: '20px 0',
+    fontSize: 15,
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '10px 0px !important',
+    padding: '0px 20px',
+    '& a ~ a': {
+      paddingLeft: 10,
+      fontSize: 14,
+    },
+  },
+  copywriting: {
+    display: 'flex',
+    justifyContent: 'center',
+    '& p': {
+      fontSize: 14,
+    },
   },
 }))

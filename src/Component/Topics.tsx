@@ -14,7 +14,7 @@ interface TopicsProps {
 export const Topics: React.FC<TopicsProps> = ({ classes }: TopicsProps): React.ReactElement => {
   const topics = useSelector(getTopics)
   const loadingStatus = useSelector(getLoadingStatus)
-  
+
   if (loadingStatus !== LoadingStatus.LOADED) {
     return <Preloader />
   }
@@ -26,8 +26,8 @@ export const Topics: React.FC<TopicsProps> = ({ classes }: TopicsProps): React.R
       </Paper>
       <List>
         {topics.length > 0 &&
-          topics.map((topic) => (
-            <React.Fragment key={topic._id}>
+          topics.map((topic, index) => (
+            <React.Fragment key={index}>
               <ListItem className={classes.rightSideBlockItem}>
                 <Link to={'/home/search?q=' + topic.tag}>
                   <ListItemText
@@ -37,12 +37,12 @@ export const Topics: React.FC<TopicsProps> = ({ classes }: TopicsProps): React.R
                         <Typography component="span" variant="body1">
                           {topic.tag}
                         </Typography>
-                        <Typography component="div" variant="body1">
-                          Твитов: {topic.tweetCount}
-                        </Typography>
                       </>
                     }
                   />
+                  <Typography component="div" variant="body1">
+                    Твитов: {topic.tweetCount}
+                  </Typography>
                 </Link>
               </ListItem>
               <Divider component="li" />

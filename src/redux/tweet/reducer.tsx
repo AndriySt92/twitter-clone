@@ -28,12 +28,12 @@ export const tweetReducer = (
         ...state,
         loadingStatus: action.payload,
       }
-      case TweetActionType.CLEAN_TWEET_DATA:
-        return {
-          ...state,
-          tweet: null,
-          loadingStatus: LoadingStatus.NEVER
-        }
+    case TweetActionType.CLEAN_TWEET_DATA:
+      return {
+        ...state,
+        tweet: null,
+        loadingStatus: LoadingStatus.NEVER,
+      }
     default:
       return state
   }

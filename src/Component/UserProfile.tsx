@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 import {
@@ -12,7 +12,6 @@ import {
   DialogTitle,
   FormControl,
   TextField,
-  IconButton,
 } from '@material-ui/core'
 import ModalBlock from './ModalBlock'
 import { useForm } from 'react-hook-form'
@@ -26,8 +25,6 @@ import { getUserTweets } from '../redux/tweets/selectors'
 import { Tweet } from './Tweet'
 import { updateUserInfo } from '../redux/auth/actions'
 import { getUserData } from '../redux/auth/selectors'
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
-import { UploadImg } from './UploadImg'
 import { UploadImgAvatar } from './UploadImgAvatar'
 import { uploadImg } from '../utils/uploadImg'
 
@@ -128,7 +125,7 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
       <div className={classes.profileHeader}></div>
       <div className={classes.profileInfo}>
         <div className={classes.profileInfoHeader}>
-          <Avatar className={classes.profileAvatar} src={userData.avatar}/>
+          <Avatar className={classes.profileAvatar} src={userData.avatar} />
           <Button
             variant="outlined"
             className={classes.profileButton}
@@ -136,7 +133,6 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
             Настороить профиль
           </Button>
           <ModalBlock visible={visibleModal} onClose={handleCloseModal}>
-            {/* <TwitterIcon color="primary" className={classes.dialogIcon} /> */}
             <DialogTitle id="form-dialog-title">Изменить профиль</DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={classes.uploadAvatarBlock}>
@@ -206,29 +202,31 @@ export const UserProfile: React.FC<RouteComponentProps<{ id: string }>> = ({ mat
             </form>
           </ModalBlock>
         </div>
-        <Typography variant="h6" style={{ lineHeight: '16px' }}>
-          {userData.fullname}
-        </Typography>
-        <Typography variant="body1" color="textSecondary">
-          {userData.username}
-        </Typography>
-        <Typography variant="subtitle1" style={{ lineHeight: '40px' }}>
-          {userData.about}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary" style={{ display: 'flex' }}>
-          <DateRangeIcon /> Регистрация на сайте c {formatDateCreateProfile[1]}{' '}
-          {formatDateCreateProfile[0]} г.
-        </Typography>
-        <div style={{ display: 'flex' }}>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            style={{ display: 'flex', marginRight: '10px' }}>
-            33 в читаемых
+        <div className={classes.profileInfoMain}>
+          <Typography variant="h6" style={{ lineHeight: '16px' }}>
+            {userData.fullname}
           </Typography>
-          <Typography variant="body1" color="textSecondary" style={{ display: 'flex' }}>
-            12 читателей
+          <Typography variant="body1" color="textSecondary">
+            {userData.username}
           </Typography>
+          <Typography variant="subtitle1" style={{ lineHeight: '40px' }}>
+            {userData.about}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary" style={{ display: 'flex' }}>
+            <DateRangeIcon /> Регистрация на сайте c {formatDateCreateProfile[1]}{' '}
+            {formatDateCreateProfile[0]} г.
+          </Typography>
+          <div style={{ display: 'flex' }}>
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              style={{ display: 'flex', marginRight: '10px' }}>
+              33 в читаемых
+            </Typography>
+            <Typography variant="body1" color="textSecondary" style={{ display: 'flex' }}>
+              12 читателей
+            </Typography>
+          </div>
         </div>
         <Tabs
           value={value}

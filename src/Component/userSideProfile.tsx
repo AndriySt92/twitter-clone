@@ -37,17 +37,13 @@ export const UserSideProfile: React.FC<UserSideProfilePropsType> = ({ classes })
   return (
     <div className={classes.userSideProfile}>
       <div className={classes.userSideProfileInfo}>
-        <Avatar
-          className={classes.tweetAvatar}
-          alt="Travis Howard"
-          src={userData?.avatar}
-        />
-        <Typography>
+        <Avatar className={classes.tweetAvatar} alt="Travis Howard" src={userData?.avatar} />
+        <div>
           <b>{userData.fullname}</b>
           <Typography color="textSecondary">
             <span>{userData.username}</span>
           </Typography>
-        </Typography>
+        </div>
       </div>
       <div>
         <IconButton onClick={handleClick}>

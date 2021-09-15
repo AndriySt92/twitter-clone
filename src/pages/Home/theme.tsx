@@ -1,7 +1,5 @@
-import { theme } from '../../theme'
 import { makeStyles } from '@material-ui/core'
 import grey from '@material-ui/core/colors/grey'
-import { relative } from 'path'
 
 export const useHomeStyle = makeStyles((theme) => ({
   centered: {
@@ -12,6 +10,12 @@ export const useHomeStyle = makeStyles((theme) => ({
   },
   wrapper: {
     height: '100vh',
+  },
+  menu: {
+    display: 'flex',
+    justifyContent: 'center',
+    position: 'sticky',
+    top: '0px',
   },
   menuList: {
     position: 'sticky',
@@ -100,7 +104,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     },
   },
   tweetContent: {
-    width: '100%',
+    width: '88%',
   },
   tweetContentHeader: {
     position: 'relative',
@@ -216,7 +220,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 5,
     height: 50,
   },
   tweetFormFooterIcon: {
@@ -318,6 +322,10 @@ export const useHomeStyle = makeStyles((theme) => ({
   readUserItem: {
     display: 'flex',
     justifyContent: 'space-between',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#edf3f6',
+    },
   },
   readUserItemInfo: {
     display: 'flex',
@@ -337,8 +345,8 @@ export const useHomeStyle = makeStyles((theme) => ({
     height: 32,
     padding: '0px 15px',
     '&:hover': {
-      backgroundColor: '#292929'
-    }
+      backgroundColor: '#292929',
+    },
   },
   imagesList: {
     display: 'flex',
@@ -381,8 +389,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     justifyContent: 'space-between',
     position: 'fixed',
     bottom: 20,
-    left: 302,
-    width: 210,
+    width: 'fit-content',
     padding: 8,
     borderRadius: 31,
     backgroundColor: 'white',
@@ -408,7 +415,6 @@ export const useHomeStyle = makeStyles((theme) => ({
   profileInfo: {
     position: 'relative',
     top: -78,
-    padding: '0px 10px',
     '& .MuiTabs-root': {
       margin: '0px -10px',
       '& .MuiTab-root': {
@@ -423,6 +429,7 @@ export const useHomeStyle = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+    padding: '0px 10px',
   },
   profileAvatar: {
     height: 133,
@@ -431,6 +438,9 @@ export const useHomeStyle = makeStyles((theme) => ({
   },
   profileButton: {
     marginBottom: 10,
+  },
+  profileInfoMain: {
+    padding: '0px 10px',
   },
   uploadAvatarBlock: {
     display: 'flex',

@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@material-ui/icons/Close'
 import { useHomeStyle } from '../pages/Home/theme'
 import { ImagesFileType } from './TweetForm'
-import { ImageList } from './ImageList'
 
 interface UploadImgProps {
   classes: ReturnType<typeof useHomeStyle>
   image: ImagesFileType | null
-  onChangeImages: (img: ImagesFileType | null ) => void
+  onChangeImages: (img: ImagesFileType | null) => void
 }
 
 export const UploadImgAvatar: React.FC<UploadImgProps> = ({ classes, onChangeImages, image }) => {
@@ -51,13 +50,15 @@ export const UploadImgAvatar: React.FC<UploadImgProps> = ({ classes, onChangeIma
   return (
     <>
       <div className={classes.imagesUploadButton}>
-      <IconButton  onClick={handlerClickImg}>
-        <PhotoCameraIcon />
-      </IconButton>
-      {image && <IconButton onClick={handleRemoveImages}>
-        <CloseIcon />
-      </IconButton>}
-      <input ref={inputRef} type="file" hidden />
+        <IconButton onClick={handlerClickImg}>
+          <PhotoCameraIcon />
+        </IconButton>
+        {image && (
+          <IconButton onClick={handleRemoveImages}>
+            <CloseIcon />
+          </IconButton>
+        )}
+        <input ref={inputRef} type="file" hidden />
       </div>
     </>
   )

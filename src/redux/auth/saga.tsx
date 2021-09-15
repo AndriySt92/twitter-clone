@@ -16,8 +16,10 @@ function* signUpRequest({ payload }: FetchSignUpDataActionType): any {
     yield put(setLoandingStatus(LoadingStatus.LOADING))
     const { data } = yield call(authApi.signUp, payload)
     yield put(setLoandingStatus(LoadingStatus.LOADED))
+    alert(data.message)
   } catch (error) {
     yield put(setLoandingStatus(LoadingStatus.ERROR))
+    alert(error)
   }
 }
 
@@ -45,9 +47,7 @@ function* getMeRequest(): any {
   try {
     const { data } = yield call(authApi.getMe)
     yield put(setUserData(data))
-  } catch (error) {
-    yield put(setLoandingStatus(LoadingStatus.ERROR))
-  }
+  } catch (error) {}
 }
 
 export function* authSaga() {

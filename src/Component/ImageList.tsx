@@ -2,7 +2,6 @@ import React from 'react'
 import ClearIcon from '@material-ui/icons/Clear'
 import IconButton from '@material-ui/core/IconButton'
 import { useHomeStyle } from '../pages/Home/theme'
-import mediumZoom from 'medium-zoom'
 
 interface ImageListPropsType {
   images: string[]
@@ -15,7 +14,6 @@ export const ImageList: React.FC<ImageListPropsType> = ({
   classes,
   handleRemoveImages,
 }) => {
-
   if (!images) {
     return null
   }

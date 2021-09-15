@@ -10,5 +10,5 @@ export const rootReducer = combineReducers({
   topics: topicsReducer,
   tweet: tweetReducer,
   auth: authReducer,
-  users: userReducer
+  users: userReducer,
 })

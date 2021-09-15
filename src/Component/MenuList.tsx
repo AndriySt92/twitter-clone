@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { IconButton, Typography, Button, Hidden, Dialog, DialogContent } from '@material-ui/core'
+import { IconButton, Typography, Button, Hidden } from '@material-ui/core'
 import { useHomeStyle } from '../pages/Home/theme'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import HomeIcon from '@material-ui/icons/Home'
@@ -13,12 +13,10 @@ import ListAltIcon from '@material-ui/icons/ListAlt'
 import PersonIcon from '@material-ui/icons/Person'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import CreateIcon from '@material-ui/icons/Create'
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles'
-import MuiDialogTitle from '@material-ui/core/DialogTitle'
-import CloseIcon from '@material-ui/icons/Close'
 import { TweetForm } from './TweetForm'
 import ModalBlock from './ModalBlock'
 import { getUserData } from '../redux/auth/selectors'
+import { UserSideProfile } from './userSideProfile'
 
 interface MenuListProps {
   classes: ReturnType<typeof useHomeStyle>
@@ -38,7 +36,7 @@ export const MenuList: React.FC<MenuListProps> = ({
   }
 
   return (
-    <div>
+    <div className={classes.menu}>
       <ul className={classes.menuList}>
         <li>
           <Link to="/home" className={classes.menuListLink}>
@@ -160,6 +158,7 @@ export const MenuList: React.FC<MenuListProps> = ({
           </ModalBlock>
         </li>
       </ul>
+      <UserSideProfile classes={classes} />
     </div>
   )
 }

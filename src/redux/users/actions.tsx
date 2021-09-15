@@ -1,4 +1,3 @@
-import { Action } from 'redux'
 import { LoadingStatus } from '../Types'
 import { UserDataType } from '../auth/Types'
 

@@ -29,11 +29,9 @@ const LoginFormSchema = yup.object().shape({
   username: yup.string().required('Введите логин'),
   password: yup
     .string()
-    .min(6, 'Минимальное количество пароля 6 символов')
+    .min(6, 'Минимальное количество символов пароля 6 символов')
     .required('Введите пароль'),
-  password2: yup
-    .string()
-    .oneOf([yup.ref('password')], 'Пароли не совпадают'),
+  password2: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают'),
 })
 
 export const RegisterModalBlock: React.FC<RegisterModalBlock> = ({
@@ -57,7 +55,10 @@ export const RegisterModalBlock: React.FC<RegisterModalBlock> = ({
   useEffect(() => {
     setStatus(loadingStatusAuth)
     if (status === 'LOADED') {
-      openNotificationRef.current('Регистрация прошла успешно. Мы Вам отправили письмо, подтвердите регистрацию на почте', 'success')
+      openNotificationRef.current(
+        'Регистрация прошла успешно. Мы Вам отправили письмо, подтвердите регистрацию на почте',
+        'success',
+      )
       onClose()
     } else if (status === 'ERROR') {
       openNotificationRef.current('Ошибка регистрации', 'error')
@@ -175,7 +176,12 @@ export const RegisterModalBlock: React.FC<RegisterModalBlock> = ({
                 />
               </FormControl>
               <DialogActions>
-                <Button disabled={loadingStatusAuth === "LOADING"} type="submit" color="primary" variant="contained" fullWidth>
+                <Button
+                  disabled={loadingStatusAuth === 'LOADING'}
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  fullWidth>
                   Зарегистрироваться
                 </Button>
               </DialogActions>

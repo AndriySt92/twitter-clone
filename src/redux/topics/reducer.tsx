@@ -16,19 +16,19 @@ export const topicsReducer = (
       return {
         ...state,
         topics: [],
-        loadingStatus: LoadingStatus.LOADING
+        loadingStatus: LoadingStatus.LOADING,
       }
     case TopicsActionType.SET_TOPICS:
       return {
         ...state,
         topics: action.payload,
-        loadingStatus: LoadingStatus.LOADED
+        loadingStatus: LoadingStatus.LOADED,
       }
-      case TopicsActionType.SET_LOADING_STATUS: 
-       return {
-         ...state,
-         loadingStatus: action.payload
-       }
+    case TopicsActionType.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loadingStatus: action.payload,
+      }
     default:
       return state
   }

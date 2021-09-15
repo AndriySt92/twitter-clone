@@ -3,21 +3,7 @@ import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Preloader } from '../../Component/Preloader'
 import { Tweet } from '../../Component/Tweet'
-import {
-  Paper,
-  Typography,
-  Container,
-  Grid,
-  Avatar,
-  ListItemAvatar,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Button,
-  InputAdornment,
-  IconButton,
-} from '@material-ui/core'
+import { Paper, Typography, Container, Grid, InputAdornment } from '@material-ui/core'
 import { MenuList } from '../../Component/MenuList'
 import SearchIcon from '@material-ui/icons/Search'
 import { useHomeStyle } from './theme'
@@ -29,7 +15,6 @@ import { getLoadingStatusFetchTweets, getTweets, getUserTweets } from '../../red
 import { fetchTopics } from '../../redux/topics/actions'
 import { Topics } from '../../Component/Topics'
 import BackButton from '../../Component/BackButton'
-import { UserSideProfile } from '../../Component/userSideProfile'
 import { UserProfile } from '../../Component/UserProfile'
 import { fetchUsers } from '../../redux/users/actions'
 import { ReadUser } from '../../Component/ReadUser'
@@ -50,10 +35,9 @@ export const Home: React.FC = (): React.ReactElement => {
   return (
     <Container className={classes.wrapper} maxWidth="lg">
       <Grid container spacing={4}>
-        <Grid item sm={1} md={2} >
+        <Grid item sm={1} md={2}>
           <MenuList classes={classes} />
         </Grid>
-        <UserSideProfile classes={classes} />
         <Grid item sm={8} md={6}>
           <Paper variant="outlined" className={classes.tweetsWrapper}>
             <Paper variant="outlined" className={classes.tweetsHeader}>
@@ -69,7 +53,7 @@ export const Home: React.FC = (): React.ReactElement => {
               <Route path="/home/tweet/:id">
                 <Typography variant="h6">Твит</Typography>
               </Route>
-              <Route path="/profile/:any" >
+              <Route path="/profile/:any">
                 <div>
                   <Typography variant="h6">Профиль</Typography>
                   <Typography variant="body2">{userTweets.length} твитов</Typography>
@@ -96,9 +80,7 @@ export const Home: React.FC = (): React.ReactElement => {
               </Paper>
               <div className={classes.tweetFormBottomLine}></div>
             </Route>
-            <Route path="/home/tweet/:id">
-              <TweetPage />
-            </Route>
+            <Route path="/home/tweet/:id">{/* <TweetPage /> */}</Route>
             <Route path="/home" exact>
               {isLoadingTweets ? (
                 <Preloader />

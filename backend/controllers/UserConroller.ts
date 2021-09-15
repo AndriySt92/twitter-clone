@@ -75,7 +75,7 @@ class UserController {
                 confirmHash: generateMD5(process.env.SECRET_KEY + randomStr || randomStr) 
             }
 
-            const user = await UserModel.create(data)
+            UserModel.create(data)
 
             sendEmail({
                 emailFrom: 'admin@twitter-clone.com',
@@ -86,7 +86,7 @@ class UserController {
                 if(err == null) {
                     res.json({
                         status: 'success',
-                        data: user
+                        message: 'Данные успешно сохранены.Проверте свою почту чтобы подтвердить регистрацию',
                     })
                 } else {
                     res.status(500).json({

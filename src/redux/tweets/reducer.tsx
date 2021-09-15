@@ -42,10 +42,8 @@ export const tweetsReducer = (
         ...state,
         loadingStatusAddTweet: action.payload,
       }
-      case TweetsActionType.SET_USER_TWEETS:
-        return {...state,
-        userTweets: action.payload
-        }
+    case TweetsActionType.SET_USER_TWEETS:
+      return { ...state, userTweets: action.payload }
 
     default:
       return state

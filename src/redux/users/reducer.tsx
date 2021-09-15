@@ -18,11 +18,11 @@ export const userReducer = (
         users: action.payload,
         loadingStatus: LoadingStatus.LOADED,
       }
-      case UsersActionType.SET_LOADING_STATUS:
-        return {
-          ...state,
-          loadingStatus: action.payload
-        }
+    case UsersActionType.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loadingStatus: action.payload,
+      }
     default:
       return state
   }

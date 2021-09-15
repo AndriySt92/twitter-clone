@@ -1,9 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import {
-  UsersActionType,
-  setLoadingStatus,
-  setUsers,
-} from './actions'
+import { UsersActionType, setLoadingStatus, setUsers } from './actions'
 import { LoadingStatus } from '../Types'
 import { userApi } from '../../API/userApi'
 

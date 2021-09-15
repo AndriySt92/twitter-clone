@@ -41,7 +41,11 @@ export interface SetLodingStatus extends Action<TweetActionType> {
 }
 
 export interface CleanTweetData extends Action<TweetActionType> {
-    type: TweetActionType.CLEAN_TWEET_DATA
+  type: TweetActionType.CLEAN_TWEET_DATA
 }
 
-export type TweetActions = SetTweetActionType | SetLodingStatus | FetchTweetActionType | CleanTweetData
+export type TweetActions =
+  | SetTweetActionType
+  | SetLodingStatus
+  | FetchTweetActionType
+  | CleanTweetData

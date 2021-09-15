@@ -1,6 +1,5 @@
 import { axios } from '../core/axios'
-import { TweetState } from '../redux/tweet/Types'
-import { Tweet, TweetsState } from '../redux/tweets/Types'
+import { Tweet } from '../redux/tweets/Types'
 
 interface ResponseTweets<T> {
   status: string

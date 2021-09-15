@@ -1,5 +1,4 @@
-
-import { UserDataType } from '../auth/Types';
+import { UserDataType } from '../auth/Types'
 import { LoadingStatus } from '../Types'
 
 export interface UsersStateType {
