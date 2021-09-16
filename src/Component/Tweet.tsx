@@ -19,7 +19,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { useHomeStyle } from '../pages/Home/theme'
 import { formatDate } from '../utils/formatDate'
 import { ImageList } from './ImageList'
-import { removeTweet, setTweetLike, updateTweet } from '../redux/tweets/actions'
+import { removeTweet, likeTweet, updateTweet } from '../redux/tweets/actions'
 import { getUserData } from '../redux/auth/selectors'
 
 interface TweetProps {
@@ -28,7 +28,7 @@ interface TweetProps {
   classes: ReturnType<typeof useHomeStyle>
   createdAt: string
   images?: string[]
-  likeCount: string
+  likeCount: string | number
   user: {
     fullname: string
     username: string
@@ -109,7 +109,7 @@ export const Tweet: React.FC<TweetProps> = ({
         userId: authUser?._id,
         tweetId: _id,
       }
-      dispatch(setTweetLike(payload))
+      dispatch(likeTweet(payload))
     }
   }
 

@@ -20,8 +20,15 @@ export const tweetsApi = {
     return data
   },
   removeTweet: (tweetId: string): Promise<void> => axios.delete(`/tweet/${tweetId}`),
-  updateTweet: (payload: { tweetId: string; text: string }): Promise<void> =>
-    axios.patch(`/tweet/${payload.tweetId}`, { text: payload.text }),
-  tweetLike: (payload: { tweetId: string; userId: string }): Promise<void> =>
-    axios.get(`/like?userId=${payload.userId}&tweetId=${payload.tweetId}`),
+  updateTweet:async (payload: { tweetId: string; text: string }): Promise<ResponseTweets<Tweet>> => {
+    const { data } = await axios.patch(`/tweet/${payload.tweetId}`, { text: payload.text })
+    return data
+  },
+  tweetLike: async (payload: {
+    tweetId: string
+    userId: string
+  }): Promise<ResponseTweets<Tweet>> => {
+    const { data } = await axios.get(`/like?userId=${payload.userId}&tweetId=${payload.tweetId}`)
+    return data
+  },
 }

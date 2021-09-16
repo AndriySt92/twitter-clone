@@ -16,7 +16,7 @@ import { getLoadingStatusTweet, getTweet } from '../redux/tweet/selectors'
 import { TweetForm } from './TweetForm'
 import { ImageList } from './ImageList'
 import { getUserData } from '../redux/auth/selectors'
-import { setTweetLike } from '../redux/tweets/actions'
+import { likeTweet } from '../redux/tweets/actions'
 
 export const TweetPage: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch()
@@ -44,7 +44,7 @@ export const TweetPage: React.FC = (): React.ReactElement | null => {
         userId: authUser._id,
         tweetId: tweet._id,
       }
-      dispatch(setTweetLike(payload))
+      dispatch(likeTweet(payload))
     }
   }
 

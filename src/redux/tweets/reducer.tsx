@@ -1,4 +1,4 @@
-import { TweetsState } from './Types'
+import { Tweet, TweetsState } from './Types'
 import { LoadingStatus } from '../Types'
 import { TweetsActions, TweetsActionType } from './actions'
 
@@ -44,7 +44,35 @@ export const tweetsReducer = (
       }
     case TweetsActionType.SET_USER_TWEETS:
       return { ...state, userTweets: action.payload }
-
+    case TweetsActionType.SET_UPDATED_TWEET:
+      let allTweets = state.tweets.map((tweet: Tweet) => {
+        if (tweet._id === action.payload._id) {
+          return {
+            ...tweet,
+            text: action.payload.text,
+          }
+        }
+        return tweet
+      })
+      return {
+        ...state,
+        tweets: allTweets as Tweet[],
+      }
+    case TweetsActionType.SET_LIKE_TWEET:
+      let tweets = state.tweets.map((tweet: Tweet) => {
+        if (tweet._id === action.payload._id) {
+          return {
+            ...tweet,
+            likeCount: action.payload.likeCount,
+            userIdLiked: action.payload.likeCount,
+          }
+        }
+        return tweet
+      })
+      return {
+        ...state,
+        tweets: tweets as Tweet[],
+      }
     default:
       return state
   }

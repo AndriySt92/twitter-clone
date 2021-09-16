@@ -6,7 +6,7 @@ export interface TweetModelInterface {
     text: string;
     images?: string[]
     user: UserSchemaInterface | string
-    userLikedId: string[]
+    userIdLiked: string[]
     likeCount: number
 }
 
@@ -28,7 +28,7 @@ const TweetSchema = new Schema<TweetModelInterface>({
     likeCount: {
         type: Number
     },
-    userLikedId: {
+    userIdLiked: {
         type: Array
     }
 },{

@@ -100,7 +100,7 @@ class TweetController {
                     images: req.body.images,
                     user: user._id,
                     likeCount: 0,
-                    userLikedId: []
+                    userIdLiked: []
                 }
                
                 const tweet = await TweetModel.create(data)
@@ -173,10 +173,17 @@ class TweetController {
                 if(tweet){
                     //@ts-ignore
                     if(String(tweet.user._id) === String(user._id)){
+
                         const text = req.body.text
                         tweet.text = text
-                        tweet.save()
-                        res.send()
+
+                        const updatedTweet = await tweet.save()
+
+                        res.json({
+                            status: 'success',
+                            data: updatedTweet
+                        })
+                        
                     } else {
                         res.status(403).send()
                     }
@@ -198,24 +205,27 @@ class TweetController {
     async likeTweet(req: express.Request, res: express.Response): Promise<void>{
 
         const {tweetId, userId} = req.query
-        console.log(tweetId, 'tweet')
-        console.log(userId)
+
         try {
             
                 const tweet = await TweetModel.findById(tweetId)
     
                 if(tweet){
-//@ts-ignore
-                    if(!tweet.userLikedId.includes(userId)){
-                        //@ts-ignore
-                        tweet.userLikedId = [...tweet.userLikedId, userId]
+                    
+                    if(!tweet.userIdLiked.includes(userId as string)){
+                        tweet.userIdLiked = [...tweet.userIdLiked, userId as string]
                         tweet.likeCount++
                     } else {
-                        tweet.userLikedId = tweet.userLikedId.filter(id => id !== userId)
+                        tweet.userIdLiked = tweet.userIdLiked.filter(id => id !== userId)
                         tweet.likeCount--
                     }
-                    tweet.save()
-                    res.send()
+
+                    const updatedTweet = await tweet.save()
+
+                    res.json({
+                        status: 'success',
+                        data: updatedTweet
+                    })
                     
                 } else {
                     res.status(400).send()

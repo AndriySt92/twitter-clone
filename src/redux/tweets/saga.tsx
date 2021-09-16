@@ -10,10 +10,13 @@ import {
   UpdateTweetType,
   FetchUserTweetsType,
   setUserTweets,
-  SetTweetLikeType,
+  LikeTweetType,
+  setLikeTweet,
+  setUpdatedTweet,
 } from './actions'
 import { tweetsApi } from '../../API/tweetsApi'
 import { LoadingStatus } from '../Types'
+import { setTweet } from '../tweet/actions'
 
 function* fetchTweetsRequest(): any {
   try {
@@ -56,17 +59,18 @@ function* removeTweetRequest({ payload }: RemoveTweetType): any {
 
 function* updateTweetRequest({ payload }: UpdateTweetType): any {
   try {
-    yield call(tweetsApi.updateTweet, payload)
-    yield call(fetchTweetsRequest)
+    const data = yield call(tweetsApi.updateTweet, payload)
+    yield put(setUpdatedTweet(data.data))
   } catch (error) {
     console.log(error)
   }
 }
 
-function* likeTweetRequest({ payload }: SetTweetLikeType): any {
+function* likeTweetRequest({ payload }: LikeTweetType): any {
   try {
-    yield call(tweetsApi.tweetLike, payload)
-    yield call(fetchTweetsRequest)
+    const data = yield call(tweetsApi.tweetLike, payload)
+    debugger
+    yield put(setLikeTweet(data.data))
   } catch (error) {
     console.log(error)
   }
@@ -78,5 +82,5 @@ export function* tweetsSaga() {
   yield takeEvery(TweetsActionType.ADD_TWEET, addTweetRequest)
   yield takeEvery(TweetsActionType.REMOVE_TWEET, removeTweetRequest)
   yield takeEvery(TweetsActionType.UPDATE_TWEET, updateTweetRequest)
-  yield takeEvery(TweetsActionType.SET_TWEET_LIKE, likeTweetRequest)
+  yield takeEvery(TweetsActionType.LIKE_TWEET, likeTweetRequest)
 }

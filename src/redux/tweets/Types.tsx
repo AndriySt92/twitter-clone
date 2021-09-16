@@ -7,7 +7,8 @@ export interface Tweet {
   text: string
   createdAt: string
   images: string[]
-  likeCount: string
+  likeCount: string | number
+  userIdLiked: string[]
 }
 
 export interface TweetsState {
